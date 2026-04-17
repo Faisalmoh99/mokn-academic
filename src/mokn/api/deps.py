@@ -11,6 +11,7 @@ from typing import Annotated
 from fastapi import Depends
 
 from mokn.agents.legis import LegisAgent, get_legis_agent
+from mokn.agents.planner import PlannerAgent, get_planner_agent
 from mokn.config import Settings, get_settings
 
 
@@ -22,5 +23,10 @@ def legis_agent_dep() -> LegisAgent:
     return get_legis_agent()
 
 
+def planner_agent_dep() -> PlannerAgent:
+    return get_planner_agent()
+
+
 SettingsDep = Annotated[Settings, Depends(settings_dep)]
 LegisDep = Annotated[LegisAgent, Depends(legis_agent_dep)]
+PlannerDep = Annotated[PlannerAgent, Depends(planner_agent_dep)]

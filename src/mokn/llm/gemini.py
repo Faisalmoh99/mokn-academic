@@ -90,7 +90,8 @@ class GeminiClient:
             config_kwargs["system_instruction"] = system
         if response_schema is not None:
             config_kwargs["response_mime_type"] = "application/json"
-            config_kwargs["response_schema"] = response_schema
+            raw_schema = response_schema.model_json_schema()
+            config_kwargs["response_schema"] = _sanitize_schema_for_gemini(raw_schema)
 
         config = genai_types.GenerateContentConfig(**config_kwargs)
         call_id = uuid.uuid4().hex[:12]
@@ -146,6 +147,29 @@ class GeminiClient:
                 f.write(json.dumps(entry, ensure_ascii=False) + "\n")
         except OSError:
             logger.warning("Failed to persist LLM call log", exc_info=True)
+
+
+def _sanitize_schema_for_gemini(schema: Any) -> Any:
+    """Recursively strip JSON-Schema fields Gemini's structured output rejects.
+
+    Pydantic v2 emits ``additionalProperties`` on object schemas (including
+    nested models and ``dict[str, X]`` mappings). Gemini's ``response_schema``
+    validator does not accept that field and raises ``ValueError``. We walk the
+    schema, drop the key everywhere it appears, and return a plain dict that
+    the SDK will pass through unchanged.
+
+    Add further incompatibilities here if they surface.
+    """
+    if isinstance(schema, dict):
+        cleaned: dict[str, Any] = {}
+        for key, value in schema.items():
+            if key == "additionalProperties":
+                continue
+            cleaned[key] = _sanitize_schema_for_gemini(value)
+        return cleaned
+    if isinstance(schema, list):
+        return [_sanitize_schema_for_gemini(item) for item in schema]
+    return schema
 
 
 def _extract_text(response: Any) -> str:

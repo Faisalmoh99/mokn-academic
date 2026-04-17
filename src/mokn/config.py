@@ -42,7 +42,7 @@ class Settings(BaseSettings):
         description="Where GeminiClient persists prompt+response JSONL for debugging.",
     )
     default_model_name: str = Field(
-        default="gemini-2.5-flash",
+        default="gemini-3.1-flash-lite-preview",
         description="Gemini model id used unless overridden per-call.",
     )
 

@@ -25,7 +25,7 @@ git clone <repo> && cd mokn-academic
 cp .env.example .env                # then edit: set GEMINI_API_KEY
 pip install -r requirements.txt
 python scripts/ingest_regulations.py --pdf data/regulations/handbook.pdf --collection regulations
-uvicorn src.mokn.main:app --reload
+uvicorn mokn.main:app --app-dir src --reload --reload-dir src
 ```
 
 Ask Legis a question:
