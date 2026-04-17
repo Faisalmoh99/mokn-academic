@@ -1,0 +1,55 @@
+{
+  "description": "10 Arabic test questions for Legis. Expected answers reference the seed corpus in scripts/seed_test_data.py.",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "كم الحد الأقصى للساعات المسموح بها للطالب بمعدل 2.8؟",
+      "expected_topic": "credit-hours"
+    },
+    {
+      "id": "q2",
+      "question": "هل يمكنني تسجيل 18 ساعة إذا كان معدلي 3.1؟",
+      "expected_topic": "credit-hours"
+    },
+    {
+      "id": "q3",
+      "question": "ما هو الحد الأدنى لعدد الساعات للطالب المنتظم؟",
+      "expected_topic": "credit-hours"
+    },
+    {
+      "id": "q4",
+      "question": "هل يحق لي تسجيل برمجة 2 دون اجتياز برمجة 1؟",
+      "expected_topic": "prerequisites"
+    },
+    {
+      "id": "q5",
+      "question": "ما شروط استثناء المتطلب السابق في فصل التخرج؟",
+      "expected_topic": "prerequisites"
+    },
+    {
+      "id": "q6",
+      "question": "متى أحرم من دخول الاختبار النهائي بسبب الغياب؟",
+      "expected_topic": "attendance"
+    },
+    {
+      "id": "q7",
+      "question": "هل يوجد إنذار كتابي قبل الحرمان؟",
+      "expected_topic": "attendance"
+    },
+    {
+      "id": "q8",
+      "question": "كم عدد الساعات المسموح بها في الفصل الصيفي؟",
+      "expected_topic": "summer-term"
+    },
+    {
+      "id": "q9",
+      "question": "هل أستطيع تسجيل 10 ساعات في الصيفي؟",
+      "expected_topic": "summer-term"
+    },
+    {
+      "id": "q10",
+      "question": "كم سعر الوجبة في مطعم الجامعة؟",
+      "expected_topic": "out-of-scope"
+    }
+  ]
+}
