@@ -27,7 +27,7 @@ from mokn.data.repository import (
     get_student_repository,
 )
 from mokn.llm.gemini import GeminiClient, get_gemini_client
-from mokn.planning.optimizer import generate_schedule_candidates
+from mokn.planning.optimizer import HardConstraints, generate_schedule_candidates
 from mokn.schemas.agent import AgentContext, AgentResponse
 from mokn.schemas.schedule import ScheduleOption, ScheduleProposal
 from mokn.schemas.student import Student
@@ -97,6 +97,7 @@ class PlannerAgent(BaseAgent):
         target_hours = int(context.metadata.get("target_hours", 15))
         target_semester = str(context.metadata.get("target_semester", "fall"))
         prior_objections = list(context.metadata.get("prior_objections", []))
+        constraints = _coerce_constraints(context.metadata.get("hard_constraints"))
         if not student_id:
             raise ValueError("PlannerAgent.process requires a student_id")
 
@@ -108,6 +109,7 @@ class PlannerAgent(BaseAgent):
             available_courses=eligible,
             target_hours=target_hours,
             max_options=self._max_options,
+            constraints=constraints,
         )
 
         if not options:
@@ -280,6 +282,21 @@ def _build_ranking_prompt(
         أعد النتيجة JSON مطابق لمخطط _PlannerDecision.
         """
     ).strip()
+
+
+def _coerce_constraints(raw: Any | None) -> HardConstraints | None:
+    if raw is None:
+        return None
+    if isinstance(raw, HardConstraints):
+        return raw
+    if not isinstance(raw, dict):
+        return None
+    return HardConstraints(
+        min_credits=raw.get("min_credits"),
+        max_credits=raw.get("max_credits"),
+        excluded_courses=set(raw.get("excluded_courses") or []),
+        required_courses=set(raw.get("required_courses") or []),
+    )
 
 
 def _automatic_warnings(student: Student, options: list[ScheduleOption]) -> list[str]:

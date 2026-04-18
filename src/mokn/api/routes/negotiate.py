@@ -17,7 +17,9 @@ from mokn.api.deps import (
     PlannerDep,
     StudentRepoDep,
 )
+from mokn.negotiation.constraint_extractor import extract_constraints_from_objections
 from mokn.negotiation.graph import run_negotiation
+from mokn.planning.optimizer import HardConstraints
 from mokn.schemas.negotiation import NegotiationSession, NegotiationTurn
 
 router = APIRouter(prefix="/api/negotiate", tags=["negotiate"])
@@ -51,6 +53,9 @@ async def negotiate(
     courses: CourseRepoDep,
     store: NegotiationStoreDep,
 ) -> NegotiationSession:
+    async def _extract(objections: list[str]) -> HardConstraints:
+        return await extract_constraints_from_objections(objections, orchestrator._llm)
+
     session = await run_negotiation(
         user_request=payload.request,
         student_id=payload.student_id,
@@ -60,6 +65,7 @@ async def negotiate(
         students=students,
         courses=courses,
         max_rounds=payload.max_rounds,
+        constraints_extractor=_extract,
     )
     await store.save(session)
     return session

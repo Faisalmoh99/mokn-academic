@@ -23,6 +23,7 @@ import pytest
 from mokn.agents.orchestrator import IntentClassification
 from mokn.data.repository import CourseRepository, StudentRepository
 from mokn.negotiation.graph import run_negotiation
+from mokn.planning.optimizer import HardConstraints
 from mokn.schemas.agent import AgentResponse, VetoDecision
 from mokn.schemas.negotiation import NegotiationOutcome, TurnType
 from mokn.schemas.regulations import RegulationAnswer
@@ -341,6 +342,102 @@ async def test_persistent_veto_escalates_at_max_rounds(
 
     veto_turns = [t for t in session.turns if t.turn_type == TurnType.LEGIS_VETO]
     assert [t.round_number for t in veto_turns] == [1, 2, 3]
+
+
+@pytest.mark.asyncio
+async def test_planner_receives_hard_constraints_after_veto(
+    students_repo: StudentRepository,
+    courses_repo: CourseRepository,
+) -> None:
+    """The hotfix lever: when Legis vetoes round 1, the constraint extractor
+    distills the objection into HardConstraints, which the planner_propose
+    node forwards into the Planner's metadata. Without this, retries are
+    cosmetic — the solver re-emits the same schedule.
+    """
+    orch = _FakeOrchestrator(
+        intent="build_schedule", target_hours=18, target_semester="fall-2026"
+    )
+    planner = _FakePlanner(
+        lambda n: _proposal_for_round(n, student_id="442009876", semester="fall-2026")
+    )
+    legis = _FakeLegis(
+        veto_sequence=[
+            VetoDecision(
+                agent="Legis",
+                veto=True,
+                reason="معدل 2.8 — الحد الأقصى 15 ساعة بحسب المادة 14.",
+                violated_rules=["credit-hour-cap"],
+                suggestion="خفّض إلى 15 ساعة.",
+            ),
+            None,
+        ]
+    )
+
+    extractor_calls: list[list[str]] = []
+
+    async def fake_extractor(objs: list[str]) -> HardConstraints:
+        extractor_calls.append(list(objs))
+        return HardConstraints(max_credits=15)
+
+    await run_negotiation(
+        user_request="ابني لي جدول 18 ساعة",
+        student_id="442009876",
+        orchestrator=orch,  # type: ignore[arg-type]
+        planner=planner,  # type: ignore[arg-type]
+        legis=legis,  # type: ignore[arg-type]
+        students=students_repo,
+        courses=courses_repo,
+        constraints_extractor=fake_extractor,
+    )
+
+    assert len(planner.calls) == 2
+    assert len(extractor_calls) == 1, "extractor must run on retry round only"
+    round2_meta = planner.calls[1]["metadata"]
+    assert round2_meta.get("hard_constraints") == {
+        "min_credits": None,
+        "max_credits": 15,
+        "excluded_courses": [],
+        "required_courses": [],
+    }
+    # The soft target_hours must be clamped into the regulator's window.
+    assert round2_meta["target_hours"] <= 15
+    # And round 1 must NOT have received any constraints — there were no
+    # objections yet to extract from.
+    assert "hard_constraints" not in planner.calls[0]["metadata"]
+
+
+@pytest.mark.asyncio
+async def test_extractor_not_invoked_without_objections(
+    students_repo: StudentRepository,
+    courses_repo: CourseRepository,
+) -> None:
+    """First-round-approve happy path must skip the extractor entirely."""
+    orch = _FakeOrchestrator(
+        intent="build_schedule", target_hours=12, target_semester="fall-2026"
+    )
+    planner = _FakePlanner(
+        lambda n: _proposal_for_round(n, student_id="442001234", semester="fall-2026")
+    )
+    legis = _FakeLegis(veto_sequence=[None])
+
+    extractor_calls: list[list[str]] = []
+
+    async def fake_extractor(objs: list[str]) -> HardConstraints:
+        extractor_calls.append(list(objs))
+        return HardConstraints()
+
+    await run_negotiation(
+        user_request="ابني لي جدول 12 ساعة",
+        student_id="442001234",
+        orchestrator=orch,  # type: ignore[arg-type]
+        planner=planner,  # type: ignore[arg-type]
+        legis=legis,  # type: ignore[arg-type]
+        students=students_repo,
+        courses=courses_repo,
+        constraints_extractor=fake_extractor,
+    )
+
+    assert extractor_calls == []
 
 
 @pytest.mark.asyncio

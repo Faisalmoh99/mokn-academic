@@ -20,6 +20,7 @@ from mokn.agents.orchestrator import OrchestratorAgent
 from mokn.agents.planner import PlannerAgent
 from mokn.data.repository import CourseRepository, StudentNotFound, StudentRepository
 from mokn.negotiation.state import NegotiationState
+from mokn.planning.optimizer import HardConstraints
 from mokn.schemas.agent import AgentContext, VetoDecision
 from mokn.schemas.negotiation import NegotiationTurn, TurnType
 from mokn.schemas.regulations import RegulationAnswer
@@ -29,6 +30,7 @@ from mokn.schemas.veto_context import VetoContext
 logger = logging.getLogger(__name__)
 
 NodeFn = Callable[[NegotiationState], Awaitable[dict[str, Any]]]
+ConstraintsExtractor = Callable[[list[str]], Awaitable[HardConstraints]]
 
 _MIN_TARGET_HOURS = 12
 _HOUR_STEP_DOWN = 3
@@ -156,7 +158,19 @@ def make_legis_only_node(legis: LegisAgent) -> NodeFn:
 # ---------------------------------------------------------------------------
 # planner_propose
 # ---------------------------------------------------------------------------
-def make_planner_propose_node(planner: PlannerAgent) -> NodeFn:
+def make_planner_propose_node(
+    planner: PlannerAgent,
+    *,
+    constraints_extractor: ConstraintsExtractor | None = None,
+) -> NodeFn:
+    """Build the planner_propose node.
+
+    `constraints_extractor` (when supplied) turns prior Legis objections into
+    structured HardConstraints that the deterministic solver obeys. Without
+    it, retries can only adjust the soft target_hours — which is what caused
+    Planner to re-propose identical schedules round after round.
+    """
+
     async def planner_propose(state: NegotiationState) -> dict[str, Any]:
         round_number = state.get("round_number", 0) + 1
         base_hours = state.get("target_hours") or 15
@@ -166,14 +180,33 @@ def make_planner_propose_node(planner: PlannerAgent) -> NodeFn:
         step_down = max(round_number - 1, 0) * _HOUR_STEP_DOWN
         adjusted_hours = max(base_hours - step_down, _MIN_TARGET_HOURS)
 
+        constraints = HardConstraints()
+        if round_number > 1 and objections and constraints_extractor is not None:
+            constraints = await constraints_extractor(objections)
+            # Clamp the soft target into the regulator's window so the
+            # solver's strategies don't immediately fall back to defaults.
+            if constraints.min_credits is not None:
+                adjusted_hours = max(adjusted_hours, constraints.min_credits)
+            if constraints.max_credits is not None:
+                adjusted_hours = min(adjusted_hours, constraints.max_credits)
+
+        metadata: dict[str, Any] = {
+            "target_hours": adjusted_hours,
+            "target_semester": state.get("target_semester") or "fall",
+            "prior_objections": objections,
+        }
+        if not constraints.is_empty():
+            metadata["hard_constraints"] = {
+                "min_credits": constraints.min_credits,
+                "max_credits": constraints.max_credits,
+                "excluded_courses": sorted(constraints.excluded_courses),
+                "required_courses": sorted(constraints.required_courses),
+            }
+
         ctx = AgentContext(
             query=state["user_request"],
             student_id=state.get("student_id"),
-            metadata={
-                "target_hours": adjusted_hours,
-                "target_semester": state.get("target_semester") or "fall",
-                "prior_objections": objections,
-            },
+            metadata=metadata,
         )
         response = await planner.process(ctx)
         proposal = ScheduleProposal.model_validate(response.content)

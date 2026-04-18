@@ -31,6 +31,7 @@ from mokn.agents.orchestrator import OrchestratorAgent
 from mokn.agents.planner import PlannerAgent
 from mokn.data.repository import CourseRepository, StudentRepository
 from mokn.negotiation.nodes import (
+    ConstraintsExtractor,
     make_classify_node,
     make_fetch_student_node,
     make_legis_only_node,
@@ -57,6 +58,7 @@ def build_negotiation_graph(
     legis: LegisAgent,
     students: StudentRepository,
     courses: CourseRepository,  # reserved for future nodes (out-of-semester hints, etc.)
+    constraints_extractor: ConstraintsExtractor | None = None,
 ) -> Any:
     """Compile the cyclic Planner↔Legis graph with Orchestrator at the ends."""
     graph: StateGraph = StateGraph(NegotiationState)
@@ -64,7 +66,10 @@ def build_negotiation_graph(
     graph.add_node("classify", make_classify_node(orchestrator))
     graph.add_node("fetch_student", make_fetch_student_node(students))
     graph.add_node("legis_only", make_legis_only_node(legis))
-    graph.add_node("planner_propose", make_planner_propose_node(planner))
+    graph.add_node(
+        "planner_propose",
+        make_planner_propose_node(planner, constraints_extractor=constraints_extractor),
+    )
     graph.add_node("legis_review", make_legis_review_node(legis))
     graph.add_node("synthesize", make_synthesize_node(orchestrator))
 
@@ -106,6 +111,7 @@ async def run_negotiation(
     max_rounds: int = 3,
     session_id: str | None = None,
     recursion_limit: int = 25,
+    constraints_extractor: ConstraintsExtractor | None = None,
 ) -> NegotiationSession:
     """Run one full negotiation end-to-end and return a typed NegotiationSession."""
     from uuid import uuid4
@@ -136,6 +142,7 @@ async def run_negotiation(
         legis=legis,
         students=students,
         courses=courses,
+        constraints_extractor=constraints_extractor,
     )
     started_at = datetime.now(tz=timezone.utc)
     final_state = await compiled.ainvoke(
