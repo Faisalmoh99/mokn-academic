@@ -17,6 +17,7 @@ from mokn.llm.gemini import GeminiClient, get_gemini_client
 from mokn.memory.knowledge import KnowledgeBase, get_knowledge_base
 from mokn.schemas.agent import AgentContext, AgentResponse, VetoDecision
 from mokn.schemas.regulations import RegulationAnswer, RegulationCitation, RetrievedChunk
+from mokn.schemas.veto_context import VetoContext
 
 logger = logging.getLogger(__name__)
 
@@ -96,18 +97,38 @@ class LegisAgent(BaseAgent):
         grounded.confidence = _score_confidence(passages)
         return self._wrap(grounded, reasoning=f"retrieved {len(passages)} passages")
 
-    async def can_veto(self, proposal: dict[str, Any]) -> VetoDecision | None:
-        """Veto schedule proposals that violate cited regulations."""
-        if not _looks_like_schedule(proposal):
+    async def can_veto(
+        self,
+        proposal: dict[str, Any] | VetoContext,
+        *,
+        context: VetoContext | None = None,
+    ) -> VetoDecision | None:
+        """Veto schedule proposals that violate cited regulations.
+
+        Accepts either a raw dict proposal (legacy/precursor path) or a
+        VetoContext bundle from the Orchestrator. When a VetoContext is
+        supplied, the retrieval query is broadened with the target semester
+        and the student's GPA so Legis pulls the right articles — e.g. the
+        fall cap rather than the summer cap.
+        """
+        ctx: VetoContext | None
+        if isinstance(proposal, VetoContext):
+            ctx = proposal
+            proposal_dict = _vetocontext_to_proposal(ctx)
+        else:
+            ctx = context
+            proposal_dict = proposal
+
+        if not _looks_like_schedule(proposal_dict):
             return None
 
-        query = _schedule_probe_query(proposal)
+        query = _schedule_probe_query(proposal_dict, ctx)
         passages = await self._knowledge.query(query, top_k=self._top_k)
         if not passages:
             logger.debug("Legis.can_veto: no regulation context; abstaining")
             return None
 
-        prompt = _build_veto_prompt(proposal, passages)
+        prompt = _build_veto_prompt(proposal_dict, passages, ctx)
         decision: VetoDecision = await self._llm.generate(
             prompt,
             system=VETO_SYSTEM_PROMPT,
@@ -147,23 +168,57 @@ def _build_answer_prompt(question: str, passages: list[RetrievedChunk]) -> str:
     ).strip()
 
 
-def _build_veto_prompt(proposal: dict[str, Any], passages: list[RetrievedChunk]) -> str:
+def _build_veto_prompt(
+    proposal: dict[str, Any],
+    passages: list[RetrievedChunk],
+    ctx: VetoContext | None = None,
+) -> str:
     passage_block = "\n\n".join(
         f"[مقطع {i + 1} | {p.source} صفحة {p.page}]\n{p.text}"
         for i, p in enumerate(passages)
     )
+    context_block = ""
+    if ctx is not None:
+        prior = "\n".join(f"- {obj}" for obj in ctx.prior_objections) or "لا يوجد."
+        context_block = dedent(
+            f"""
+            سياق المراجعة:
+            - الفصل المستهدف: {ctx.target_semester}
+            - الجولة رقم: {ctx.round_number}
+            - الاعتراضات السابقة في هذه الجلسة:
+            {prior}
+            """
+        ).strip()
     return dedent(
         f"""
         الاقتراح الجاري مراجعته (JSON):
         {proposal}
 
+        {context_block}
+
         المقاطع التنظيمية ذات الصلة:
         {passage_block}
 
         أصدر قرارك بصيغة JSON مطابقة لمخطط VetoDecision.
-        اجعل agent = "Legis" دائماً.
+        اجعل agent = "Legis" دائماً. ركّز على قواعد الفصل المستهدف فقط —
+        لا تطبّق قواعد الفصل الصيفي على اقتراح فصلي اعتيادي.
         """
     ).strip()
+
+
+def _vetocontext_to_proposal(ctx: VetoContext) -> dict[str, Any]:
+    """Build a minimal proposal shape from a VetoContext that carries none."""
+    # When the Orchestrator passes only a VetoContext (no separate proposal
+    # dict), we treat the call as a pre-check on an empty proposal — not the
+    # intended path but kept safe so callers can't break the signature.
+    return {
+        "type": ctx.proposal_type,
+        "student": {
+            "id": ctx.student.student_id,
+            "gpa": ctx.student.gpa,
+        },
+        "target_semester": ctx.target_semester,
+    }
 
 
 def _enforce_citations(
@@ -215,13 +270,24 @@ def _looks_like_schedule(proposal: dict[str, Any]) -> bool:
     )
 
 
-def _schedule_probe_query(proposal: dict[str, Any]) -> str:
+def _schedule_probe_query(
+    proposal: dict[str, Any], ctx: VetoContext | None = None
+) -> str:
     student = proposal.get("student") or {}
     gpa = student.get("gpa")
     credits = proposal.get("total_credits") or proposal.get("credits")
-    parts = ["الحد الأقصى للساعات المسجلة", "المتطلبات السابقة"]
+    parts = ["العبء الدراسي", "الحد الأقصى للساعات المعتمدة", "المتطلبات السابقة"]
+    if ctx is not None:
+        semester_tag = ctx.target_semester
+        if "fall" in semester_tag.lower() or "spring" in semester_tag.lower():
+            parts.append("الفصل الدراسي الاعتيادي")
+        elif "summer" in semester_tag.lower():
+            parts.append("الفصل الصيفي")
+        parts.append(f"الفصل المستهدف {semester_tag}")
+        if ctx.student is not None:
+            gpa = gpa if gpa is not None else ctx.student.gpa
     if gpa is not None:
-        parts.append(f"معدل الطالب {gpa}")
+        parts.append(f"معدل الطالب التراكمي {gpa}")
     if credits is not None:
         parts.append(f"عدد الساعات المقترحة {credits}")
     return " | ".join(parts)

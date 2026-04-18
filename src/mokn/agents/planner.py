@@ -96,6 +96,7 @@ class PlannerAgent(BaseAgent):
         student_id = context.student_id or context.metadata.get("student_id")
         target_hours = int(context.metadata.get("target_hours", 15))
         target_semester = str(context.metadata.get("target_semester", "fall"))
+        prior_objections = list(context.metadata.get("prior_objections", []))
         if not student_id:
             raise ValueError("PlannerAgent.process requires a student_id")
 
@@ -112,7 +113,9 @@ class PlannerAgent(BaseAgent):
         if not options:
             return self._empty_response(student, target_semester, target_hours)
 
-        decision = await self._rank_with_llm(student, options, target_hours, target_semester)
+        decision = await self._rank_with_llm(
+            student, options, target_hours, target_semester, prior_objections
+        )
         proposal = self._assemble(student, options, decision, target_semester)
         return AgentResponse(
             agent="Planner",
@@ -138,8 +141,11 @@ class PlannerAgent(BaseAgent):
         options: list[ScheduleOption],
         target_hours: int,
         target_semester: str,
+        prior_objections: list[str] | None = None,
     ) -> _PlannerDecision:
-        prompt = _build_ranking_prompt(student, options, target_hours, target_semester)
+        prompt = _build_ranking_prompt(
+            student, options, target_hours, target_semester, prior_objections or []
+        )
         decision: _PlannerDecision = await self._llm.generate(
             prompt,
             system=self.system_prompt,
@@ -217,6 +223,7 @@ def _build_ranking_prompt(
     options: list[ScheduleOption],
     target_hours: int,
     target_semester: str,
+    prior_objections: list[str] | None = None,
 ) -> str:
     option_block = "\n\n".join(
         dedent(
@@ -238,6 +245,16 @@ def _build_ranking_prompt(
         )
         or "لا توجد بيانات حضور لهذا الفصل."
     )
+    objections = prior_objections or []
+    objections_block = ""
+    if objections:
+        joined = "\n".join(f"- {obj}" for obj in objections)
+        objections_block = dedent(
+            f"""
+            سابقاً اعترض Legis بما يلي في جولات سابقة — تجنب تكرار نفس المخالفة:
+            {joined}
+            """
+        ).strip()
     return dedent(
         f"""
         بيانات الطالب:
@@ -251,6 +268,8 @@ def _build_ranking_prompt(
         {attendance_block}
 
         الهدف: {target_hours} ساعة في فصل {target_semester}.
+
+        {objections_block}
 
         الخيارات المقترحة من المحرك:
         {option_block}

@@ -55,15 +55,15 @@ async def build_schedule(payload: BuildScheduleRequest, planner: PlannerDep) -> 
     return ScheduleProposal.model_validate(response.content)
 
 
-@router.post("/validate-with-legis", response_model=ValidatedProposal)
+@router.post("/validate-with-legis", response_model=ValidatedProposal, deprecated=True)
 async def validate_with_legis(
     payload: ValidateRequest, legis: LegisDep
 ) -> ValidatedProposal:
-    """Precursor to the full negotiation loop (Session 3).
+    """DEPRECATED: use /api/negotiate instead.
 
-    Translates the Planner's `ScheduleProposal` into the schedule-shaped
-    proposal Legis expects, then returns both the original proposal and the
-    veto (if any) so the caller can decide what to do next.
+    Single-round Planner→Legis handoff from Session 2. Kept so existing tests
+    and clients still work, but the real negotiation loop now lives in
+    `/api/negotiate` — which runs the Orchestrator + cyclic graph.
     """
     recommended = next(
         (o for o in payload.proposal.options if o.label == payload.proposal.recommended_option),
