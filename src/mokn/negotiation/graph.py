@@ -22,7 +22,7 @@ proposal, and only Orchestrator's synthesize step is terminal.
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Any
+from typing import Any, AsyncIterator, Literal
 
 from langgraph.graph import END, StateGraph
 
@@ -110,6 +110,30 @@ def build_negotiation_graph(
     return graph.compile()
 
 
+def _build_initial_state(
+    *, session_id: str, user_request: str, student_id: str | None, max_rounds: int
+) -> NegotiationState:
+    return {
+        "session_id": session_id,
+        "student_id": student_id,
+        "user_request": user_request,
+        "intent": "unknown",
+        "student": None,
+        "target_hours": None,
+        "target_semester": None,
+        "current_proposal": None,
+        "legis_objections": [],
+        "legis_answer": None,
+        "round_number": 0,
+        "max_rounds": max_rounds,
+        "turns": [make_user_request_turn(
+            {"session_id": session_id, "user_request": user_request}  # type: ignore[arg-type]
+        )],
+        "outcome": None,
+        "final_answer": None,
+    }
+
+
 async def run_negotiation(
     *,
     user_request: str,
@@ -128,25 +152,12 @@ async def run_negotiation(
     from uuid import uuid4
 
     sid = session_id or uuid4().hex
-    initial: NegotiationState = {
-        "session_id": sid,
-        "student_id": student_id,
-        "user_request": user_request,
-        "intent": "unknown",
-        "student": None,
-        "target_hours": None,
-        "target_semester": None,
-        "current_proposal": None,
-        "legis_objections": [],
-        "legis_answer": None,
-        "round_number": 0,
-        "max_rounds": max_rounds,
-        "turns": [make_user_request_turn(
-            {"session_id": sid, "user_request": user_request}  # type: ignore[arg-type]
-        )],
-        "outcome": None,
-        "final_answer": None,
-    }
+    initial = _build_initial_state(
+        session_id=sid,
+        user_request=user_request,
+        student_id=student_id,
+        max_rounds=max_rounds,
+    )
     compiled = build_negotiation_graph(
         orchestrator=orchestrator,
         planner=planner,
@@ -167,6 +178,78 @@ async def run_negotiation(
         started_at=started_at,
         ended_at=ended_at,
     )
+
+
+StreamEvent = tuple[Literal["turn"], NegotiationTurn] | tuple[
+    Literal["session"], NegotiationSession
+]
+
+
+async def run_negotiation_stream(
+    *,
+    user_request: str,
+    student_id: str | None,
+    orchestrator: OrchestratorAgent,
+    planner: PlannerAgent,
+    legis: LegisAgent,
+    students: StudentRepository,
+    courses: CourseRepository,
+    max_rounds: int = 3,
+    session_id: str | None = None,
+    recursion_limit: int = 25,
+    constraints_extractor: ConstraintsExtractor | None = None,
+) -> AsyncIterator[StreamEvent]:
+    """Run a negotiation and yield turn-by-turn events for SSE transport.
+
+    Yields ("turn", NegotiationTurn) for each new turn as the graph produces
+    it, and finishes with one ("session", NegotiationSession) carrying the
+    completed transcript. Uses LangGraph's `astream(stream_mode="values")` —
+    each iteration gives us the full state after a node fires, and we dedupe
+    by turn_id to emit only newly-appended turns.
+    """
+    from uuid import uuid4
+
+    sid = session_id or uuid4().hex
+    initial = _build_initial_state(
+        session_id=sid,
+        user_request=user_request,
+        student_id=student_id,
+        max_rounds=max_rounds,
+    )
+    compiled = build_negotiation_graph(
+        orchestrator=orchestrator,
+        planner=planner,
+        legis=legis,
+        students=students,
+        courses=courses,
+        constraints_extractor=constraints_extractor,
+    )
+
+    started_at = datetime.now(tz=timezone.utc)
+    emitted: set[str] = set()
+    final_state: dict[str, Any] = initial  # updated on each astream yield
+
+    async for state in compiled.astream(
+        initial,
+        config={"recursion_limit": recursion_limit},
+        stream_mode="values",
+    ):
+        final_state = state
+        for turn_dict in state.get("turns", []):
+            tid = turn_dict.get("turn_id")
+            if not tid or tid in emitted:
+                continue
+            emitted.add(tid)
+            yield "turn", NegotiationTurn.model_validate(turn_dict)
+
+    ended_at = datetime.now(tz=timezone.utc)
+    session = _to_session(
+        state=final_state,
+        student_id=student_id,
+        started_at=started_at,
+        ended_at=ended_at,
+    )
+    yield "session", session
 
 
 def _to_session(

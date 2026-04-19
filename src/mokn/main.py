@@ -5,6 +5,7 @@ Run: `uvicorn src.mokn.main:app --reload`
 from __future__ import annotations
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from mokn import __version__
 from mokn.api.routes import legis as legis_routes
@@ -21,6 +22,13 @@ def create_app() -> FastAPI:
         title="Mokn Academic API",
         version=__version__,
         description="Multi-agent academic advisor. Sessions 1-3: Legis + Planner + Orchestrator negotiation.",
+    )
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["http://localhost:3000"],
+        allow_methods=["*"],
+        allow_headers=["*"],
     )
 
     @app.get("/health", tags=["system"])
