@@ -6,9 +6,12 @@ from mokn.planning.conflicts import (
     total_credits,
     weighted_difficulty,
 )
-from mokn.planning.optimizer import generate_schedule_candidates
+from mokn.planning.errors import InsufficientCoursesError
+from mokn.planning.optimizer import HardConstraints, generate_schedule_candidates
 
 __all__ = [
+    "HardConstraints",
+    "InsufficientCoursesError",
     "find_conflicts",
     "generate_schedule_candidates",
     "sections_conflict",

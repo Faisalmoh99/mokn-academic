@@ -13,9 +13,16 @@ from dataclasses import dataclass, field
 from typing import Callable
 
 from mokn.planning.conflicts import sections_conflict, total_credits, weighted_difficulty
+from mokn.planning.errors import InsufficientCoursesError
 from mokn.schemas.course import Course, CourseSection
 from mokn.schemas.schedule import ScheduleCourse, ScheduleOption
 from mokn.schemas.student import Student, StudentPreferences
+
+# The regulatory baseline for full-time students (Article 14). The solver
+# refuses to hand Legis any proposal below this — a sub-12-credit "schedule"
+# is not a real proposal, it's a guaranteed veto in disguise. Callers can
+# opt out by passing target_hours < 12 explicitly.
+_DEFAULT_MIN_CREDITS = 12
 
 
 @dataclass
@@ -217,22 +224,99 @@ async def generate_schedule_candidates(
     vetoes. No emitted candidate may violate them — this is the lever that
     makes round 2 differ from round 1 when the regulator imposed a floor or
     ceiling on credits.
+
+    Raises `InsufficientCoursesError` when no candidate clears the report
+    floor — both passes (preferences-strict and preferences-relaxed) must
+    fail before we admit defeat. This stops the solver from emitting fake
+    empty schedules that look like valid proposals.
     """
     if target_hours <= 0:
         return []
+    constraints = constraints or HardConstraints()
 
+    report_floor = _resolve_report_floor(constraints, target_hours)
+
+    options = _solve(
+        student.preferences, available_courses, target_hours, max_options, constraints
+    )
+
+    relaxed_used = False
+    if not _meets_floor(options, report_floor) and _prefs_could_block(student.preferences):
+        relaxed_prefs = StudentPreferences(
+            preferred_times=[],
+            avoid_days=[],
+            max_hours_per_day=student.preferences.max_hours_per_day,
+        )
+        relaxed_options = _solve(
+            relaxed_prefs, available_courses, target_hours, max_options, constraints
+        )
+        if _meets_floor(relaxed_options, report_floor):
+            options = relaxed_options
+            relaxed_used = True
+
+    options = [o for o in options if o.total_credits >= report_floor]
+
+    if not options:
+        excluded = constraints.excluded_courses or set()
+        eligible_credits = sum(
+            c.credits for c in available_courses if c.code not in excluded
+        )
+        raise InsufficientCoursesError(
+            f"تعذر بناء جدول بحد أدنى {report_floor} ساعة للطالب "
+            f"{student.student_id}. المواد المؤهلة في الفصل تجمع "
+            f"{eligible_credits} ساعة فقط.",
+            student_id=student.student_id,
+            eligible_credits=eligible_credits,
+            min_required=report_floor,
+        )
+
+    if relaxed_used:
+        for opt in options:
+            opt.reasoning = (
+                "[تم تخفيف تفضيلات الأيام/الأوقات لتحقيق الحد الأدنى] " + opt.reasoning
+            )
+
+    return options
+
+
+def _resolve_report_floor(constraints: HardConstraints, target_hours: int) -> int:
+    """The minimum credits an emitted option must clear to be returned.
+
+    Explicit `min_credits` always wins. Otherwise default to the regulatory
+    baseline (12) — except when the caller deliberately asked for less,
+    which we trust (tests, advisor overrides, etc.).
+    """
+    if constraints.min_credits is not None:
+        return constraints.min_credits
+    if target_hours < _DEFAULT_MIN_CREDITS:
+        return 0
+    return _DEFAULT_MIN_CREDITS
+
+
+def _meets_floor(options: list[ScheduleOption], floor: int) -> bool:
+    return any(o.total_credits >= floor for o in options)
+
+
+def _prefs_could_block(prefs: StudentPreferences) -> bool:
+    return bool(prefs.avoid_days) or bool(prefs.preferred_times)
+
+
+def _solve(
+    prefs: StudentPreferences,
+    available_courses: list[Course],
+    target_hours: int,
+    max_options: int,
+    constraints: HardConstraints,
+) -> list[ScheduleOption]:
     options: list[ScheduleOption] = []
     seen_codes: set[tuple[str, ...]] = set()
     for strategy in _strategies(target_hours, max_options, constraints):
-        option = _build_candidate(
-            strategy, available_courses, student.preferences, constraints
-        )
+        option = _build_candidate(strategy, available_courses, prefs, constraints)
         if option is None:
             continue
         key = tuple(sorted(option.course_codes))
         if key in seen_codes:
-            continue  # skip a strategy that collapsed into an existing candidate
+            continue
         seen_codes.add(key)
         options.append(option)
-
     return options

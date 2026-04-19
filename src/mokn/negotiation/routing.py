@@ -19,6 +19,25 @@ def route_after_classify(state: NegotiationState) -> str:
     return "synthesize"
 
 
+def route_after_propose(state: NegotiationState) -> str:
+    """Skip Legis when Planner reported no_solution.
+
+    Handing an empty proposal to Legis guarantees a pointless veto for being
+    below the credit-hour floor — that was the symptom we're fixing here.
+    """
+    if _proposal_no_solution(state.get("current_proposal")):
+        return "synthesize"
+    return "legis_review"
+
+
+def _proposal_no_solution(proposal: object) -> bool:
+    if proposal is None:
+        return False
+    if isinstance(proposal, dict):
+        return bool(proposal.get("no_solution"))
+    return bool(getattr(proposal, "no_solution", False))
+
+
 def route_after_review(state: NegotiationState) -> str:
     """After Legis reviews a proposal, decide: approve, retry, or escalate."""
     turns = state.get("turns", [])

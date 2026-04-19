@@ -234,6 +234,30 @@ def _build_synthesis_prompt(
         ).strip()
 
     if outcome in {"escalated", "max_rounds"}:
+        # No-solution branch: Planner explicitly said the eligible catalog is
+        # too thin. Don't dress this up as a "we couldn't reach agreement" —
+        # that's misleading, the bottleneck is the student's prereq situation.
+        if proposal is not None and proposal.no_solution:
+            warnings_block = "\n".join(f"- {w}" for w in proposal.warnings) or "—"
+            return dedent(
+                f"""
+                الطالب طلب: {request}
+                لم يتمكن النظام من بناء جدول لأن المواد المؤهلة للطالب في هذا الفصل لا تكفي
+                لتحقيق الحد الأدنى المطلوب من الساعات.
+
+                تفاصيل:
+                {warnings_block}
+
+                اكتب رداً بالعربية للطالب:
+                - ابدأ باعتذار قصير
+                - وضّح بصراحة أن المواد التي أنهاها لا تفتح عدداً كافياً من المقررات اللاحقة هذا الفصل
+                - اقترح مراجعة المرشد الأكاديمي البشري لاستكشاف استثناء أو مسار بديل
+                - لا تتحدث عن "اتفاق" أو "جولات نقاش" — المشكلة ليست في التفاوض بل في المواد المتاحة
+                - نبرة مرشد ودود، ليست آلية
+                أعد الرد فقط كنص (ليس JSON).
+                """
+            ).strip()
+
         objections_block = "\n".join(f"- {o}" for o in legis_objections) or "—"
         cap = max_rounds if max_rounds is not None else round_number
         return dedent(

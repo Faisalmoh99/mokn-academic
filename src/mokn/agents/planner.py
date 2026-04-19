@@ -27,6 +27,7 @@ from mokn.data.repository import (
     get_student_repository,
 )
 from mokn.llm.gemini import GeminiClient, get_gemini_client
+from mokn.planning.errors import InsufficientCoursesError
 from mokn.planning.optimizer import HardConstraints, generate_schedule_candidates
 from mokn.schemas.agent import AgentContext, AgentResponse
 from mokn.schemas.schedule import ScheduleOption, ScheduleProposal
@@ -104,16 +105,31 @@ class PlannerAgent(BaseAgent):
         student = await self._students.get(student_id)
         eligible = await self._eligible_courses(student, target_semester)
 
-        options = await generate_schedule_candidates(
-            student=student,
-            available_courses=eligible,
-            target_hours=target_hours,
-            max_options=self._max_options,
-            constraints=constraints,
-        )
+        try:
+            options = await generate_schedule_candidates(
+                student=student,
+                available_courses=eligible,
+                target_hours=target_hours,
+                max_options=self._max_options,
+                constraints=constraints,
+            )
+        except InsufficientCoursesError as exc:
+            return self._no_solution_response(
+                student, target_semester, target_hours, exc
+            )
 
         if not options:
-            return self._empty_response(student, target_semester, target_hours)
+            # Defensive: optimizer now raises instead of returning empty, but
+            # keep a fall-through so we never pretend an empty list is valid.
+            return self._no_solution_response(
+                student,
+                target_semester,
+                target_hours,
+                InsufficientCoursesError(
+                    "تعذر بناء جدول: لا توجد مواد مؤهلة كافية.",
+                    student_id=student.student_id,
+                ),
+            )
 
         decision = await self._rank_with_llm(
             student, options, target_hours, target_semester, prior_objections
@@ -194,28 +210,38 @@ class PlannerAgent(BaseAgent):
             constraints_considered=_dedupe(constraints),
         )
 
-    def _empty_response(
-        self, student: Student, target_semester: str, target_hours: int
+    def _no_solution_response(
+        self,
+        student: Student,
+        target_semester: str,
+        target_hours: int,
+        exc: InsufficientCoursesError,
     ) -> AgentResponse:
-        placeholder = ScheduleOption(
-            label="empty",
-            courses=[],
-            total_credits=0,
-            estimated_difficulty=0.0,
-            reasoning="لا توجد مواد مؤهلة للطالب في هذا الفصل.",
+        """Return a structured `no_solution` proposal — never a fake empty one.
+
+        The original bug was that an empty schedule was dressed up as a valid
+        proposal and sent to Legis, which predictably vetoed it for being
+        below the credit-hour floor, triggering a pointless retry loop.
+        """
+        warning = (
+            f"لا يمكن بناء جدول بالحد الأدنى المطلوب ({exc.min_required or 12} ساعة). "
+            f"المواد المؤهلة للطالب في هذا الفصل غير كافية."
         )
+        if exc.eligible_credits is not None:
+            warning += f" (إجمالي الساعات المؤهلة: {exc.eligible_credits})."
         proposal = ScheduleProposal(
             student_id=student.student_id,
             target_semester=target_semester,
-            options=[placeholder],
-            recommended_option="empty",
-            warnings=["لا توجد مواد متاحة تستوفي المتطلبات السابقة للطالب."],
+            options=[],
+            recommended_option="",
+            warnings=[warning],
             constraints_considered=["المتطلبات السابقة", "الفصل المستهدف"],
+            no_solution=True,
         )
         return AgentResponse(
             agent="Planner",
             content=proposal.model_dump(),
-            reasoning=f"no eligible courses for student {student.student_id} in {target_semester}",
+            reasoning=f"no_solution for student {student.student_id}: {exc}",
             confidence="low",
         )
 

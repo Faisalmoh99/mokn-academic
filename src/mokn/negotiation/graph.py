@@ -40,7 +40,11 @@ from mokn.negotiation.nodes import (
     make_synthesize_node,
     make_user_request_turn,
 )
-from mokn.negotiation.routing import route_after_classify, route_after_review
+from mokn.negotiation.routing import (
+    route_after_classify,
+    route_after_propose,
+    route_after_review,
+)
 from mokn.negotiation.state import NegotiationState
 from mokn.schemas.negotiation import (
     Intent,
@@ -84,7 +88,14 @@ def build_negotiation_graph(
         },
     )
     graph.add_edge("fetch_student", "planner_propose")
-    graph.add_edge("planner_propose", "legis_review")
+    graph.add_conditional_edges(
+        "planner_propose",
+        route_after_propose,
+        {
+            "legis_review": "legis_review",
+            "synthesize": "synthesize",
+        },
+    )
     graph.add_conditional_edges(
         "legis_review",
         route_after_review,

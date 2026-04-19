@@ -210,15 +210,21 @@ def make_planner_propose_node(
         )
         response = await planner.process(ctx)
         proposal = ScheduleProposal.model_validate(response.content)
+        if proposal.no_solution:
+            summary = (
+                "Planner: لا يوجد جدول يفي بالحد الأدنى — المواد المؤهلة للطالب غير كافية."
+            )
+        else:
+            summary = (
+                f"Planner: اقترح {_recommended_credits(proposal)} ساعة "
+                f"(الخيار {proposal.recommended_option})."
+            )
         turn = _make_turn(
             session_id=state["session_id"],
             round_number=round_number,
             turn_type=TurnType.PLANNER_PROPOSE,
             agent="Planner",
-            summary=(
-                f"Planner: اقترح {_recommended_credits(proposal)} ساعة "
-                f"(الخيار {proposal.recommended_option})."
-            ),
+            summary=summary,
             content=proposal.model_dump(),
         )
         return {
@@ -312,11 +318,15 @@ def make_synthesize_node(orchestrator: OrchestratorAgent) -> NodeFn:
         max_rounds = state.get("max_rounds", 3)
 
         # Resolve terminal outcome if the review loop dropped us here.
+        proposal_state = state.get("current_proposal")
+        no_solution = _is_no_solution(proposal_state)
         if outcome is None:
             if intent == "unknown":
                 outcome = "out_of_scope"
             elif intent == "regulation_question":
                 outcome = "regulation_only"
+            elif no_solution:
+                outcome = "escalated"
             elif state.get("legis_objections") and round_number >= max_rounds:
                 outcome = "escalated"
             else:
@@ -343,12 +353,16 @@ def make_synthesize_node(orchestrator: OrchestratorAgent) -> NodeFn:
             "max_rounds": "Orchestrator: استنفدت الجولات — تصعيد إلى مرشد بشري.",
             "out_of_scope": "Orchestrator: الطلب خارج نطاق الإرشاد — طلب توضيح.",
         }
+        if no_solution:
+            summary = "Orchestrator: لا توجد مواد مؤهلة كافية — توجيه الطالب للمرشد."
+        else:
+            summary = summary_map.get(outcome, "Orchestrator: صياغة الرد النهائي.")
         turn = _make_turn(
             session_id=state["session_id"],
             round_number=round_number,
             turn_type=TurnType.ORCHESTRATOR_SYNTHESIZE,
             agent="Orchestrator",
-            summary=summary_map.get(outcome, "Orchestrator: صياغة الرد النهائي."),
+            summary=summary,
             content={"final_answer": final_answer, "outcome": outcome},
         )
         return {
@@ -377,3 +391,11 @@ def _recommended_credits(proposal: ScheduleProposal) -> int:
 def _one_line(text: str, *, limit: int = 120) -> str:
     clean = " ".join(text.strip().split())
     return clean if len(clean) <= limit else clean[: limit - 1] + "…"
+
+
+def _is_no_solution(proposal: Any) -> bool:
+    if proposal is None:
+        return False
+    if isinstance(proposal, dict):
+        return bool(proposal.get("no_solution"))
+    return bool(getattr(proposal, "no_solution", False))
