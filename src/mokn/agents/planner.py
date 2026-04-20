@@ -38,15 +38,25 @@ logger = logging.getLogger(__name__)
 
 PLANNER_SYSTEM_PROMPT = dedent(
     """
-    أنت "Planner" — الوكيل المتخصص في بناء الجداول الدراسية.
-    دورك: تحليل خيارات الجداول المقترحة من المحرك، واختيار الأفضل
-    بناءً على سجل الطالب وتفضيلاته.
+    أنت "Planner" — المهندس الأكاديمي. مهمتك ليست فقط اختيار جدول،
+    بل كتابة تعليل يُثبت أنك فهمت *هذا الطالب بالذات*.
 
-    قواعد صارمة:
+    قواعد صارمة لكتابة per_option_reasoning:
     1. لا تخترع مواد أو أقسام — استخدم فقط ما يعطيه المحرك.
-    2. وضح السبب وراء كل توصية.
-    3. إذا كان الطالب يواجه مخاطر (تعثر سابق، غياب عالي)، وصِ بخيار متحفظ.
-    4. أجب بالعربية.
+    2. اربط الاختيار بسجل الطالب الفعلي: اذكر رقم الساعات المكتملة،
+       أو مادة تعثّر فيها بالاسم، أو غياباً مرتفعاً، أو تفضيلاً في الأيام.
+    3. إذا رفض Legis جولة سابقة، اذكر السبب ووضّح كيف عالجته.
+    4. اربط الخيار بمسار التخرج عندما يكون ذلك ملائماً
+       (مثل "هذه المواد تفتح لك CS401 لاحقاً").
+    5. اللغة عربية فصحى مبسطة، وبحدّ أقصى 3 أسطر لكل خيار.
+
+    ممنوع منعاً باتاً:
+    - العبارات العامة مثل "جدول متوازن" أو "مناسب" بدون سبب مربوط بسجل الطالب.
+    - التكرار الحرفي بين تعليلات الخيارات الثلاثة.
+    - التوصيات الفضفاضة بدون إشارة لرقم أو مادة أو تفضيل محدد.
+
+    وبالنسبة لـ warnings: اكتبها مبنية على السجل الفعلي فقط،
+    لا تكتب تحذيرات نمطية لا تخص هذا الطالب.
     """
 ).strip()
 
@@ -266,48 +276,84 @@ def _build_ranking_prompt(
         for o in options
     )
     notes_block = "\n".join(f"- {n}" for n in student.memory_notes) or "لا توجد ملاحظات."
-    attendance_block = (
-        "\n".join(
-            f"- {code}: {rec.absences}/{rec.limit} غياب"
-            for code, rec in student.attendance.items()
-        )
-        or "لا توجد بيانات حضور لهذا الفصل."
+    weak_block = _format_weak_grades(student) or "لا توجد مواد متعثّر فيها."
+    at_risk_block = _format_at_risk(student) or "لا يوجد غياب مرتفع."
+    prefs = student.preferences
+    avoid_days = "، ".join(prefs.avoid_days) if prefs.avoid_days else "لا شيء"
+    preferred_times = (
+        "، ".join(prefs.preferred_times) if prefs.preferred_times else "أي وقت"
     )
+    max_per_day = prefs.max_hours_per_day or "غير محدد"
+    progress_pct = (
+        round(student.completed_credits / student.total_credits_required * 100)
+        if student.total_credits_required
+        else 0
+    )
+
     objections = prior_objections or []
     objections_block = ""
     if objections:
         joined = "\n".join(f"- {obj}" for obj in objections)
         objections_block = dedent(
             f"""
-            سابقاً اعترض Legis بما يلي في جولات سابقة — تجنب تكرار نفس المخالفة:
+            رفض سابق من Legis في جولات هذه المحادثة — عالج هذه المخالفات بالتحديد:
             {joined}
             """
         ).strip()
     return dedent(
         f"""
-        بيانات الطالب:
-        - الاسم: {student.name}
-        - المعدل التراكمي: {student.gpa}
-        - الساعات المنجزة: {student.completed_credits}/{student.total_credits_required}
-        - التفضيلات: {student.preferences.model_dump()}
-        - ملاحظات:
+        بيانات الطالب (استخدمها بالحرف في per_option_reasoning):
+        - الاسم: {student.name} ({student.student_id})
+        - التخصص: {student.major}
+        - المعدل التراكمي: {student.gpa:.2f}
+        - الساعات المنجزة: {student.completed_credits}/{student.total_credits_required} ساعة ({progress_pct}%)
+        - الساعات المتبقية للتخرج: {student.remaining_credits}
+        - مواد متعثّر فيها أو درجة C أو أقل:
+        {weak_block}
+        - غياب مرتفع حالياً في:
+        {at_risk_block}
+        - ملاحظات أكاديمية سابقة:
         {notes_block}
-        - بيانات الحضور:
-        {attendance_block}
+        - تفضيلات الطالب:
+          · تجنب الأيام: {avoid_days}
+          · أوقات مفضّلة: {preferred_times}
+          · حد ساعات اليوم: {max_per_day}
 
-        الهدف: {target_hours} ساعة في فصل {target_semester}.
+        الطلب: {target_hours} ساعة في فصل {target_semester}.
 
         {objections_block}
 
         الخيارات المقترحة من المحرك:
         {option_block}
 
-        اختر الخيار الأنسب (recommended_option) مع تعليلات مختصرة لكل خيار في
-        per_option_reasoning، وأضف تحذيرات (warnings) إن كان سجل الطالب يدعو لذلك،
-        وعدّد القيود (constraints_considered) التي أخذتها بالحسبان.
-        أعد النتيجة JSON مطابق لمخطط _PlannerDecision.
+        المطلوب منك بالترتيب:
+        1. اختر recommended_option (استخدم label واحد من الخيارات أعلاه بالضبط).
+        2. اكتب per_option_reasoning لكل خيار — *يجب* أن يذكر كل تعليل
+           ركيزة واحدة على الأقل من سجل الطالب أعلاه (مادة متعثّر فيها،
+           أو رقم ساعات، أو غياب، أو يوم مُفضّل، أو رفض Legis السابق).
+        3. اكتب warnings مبنية على السجل الفعلي، لا قوالب جاهزة.
+        4. عدّد constraints_considered التي أخذتها بالحسبان فعلاً.
+        أعد JSON مطابق لمخطط _PlannerDecision.
         """
     ).strip()
+
+
+def _format_weak_grades(student: Student) -> str:
+    weak = [
+        f"- {c.code} ({c.name}): {c.grade}"
+        for c in student.courses_completed
+        if c.grade in {"C", "D+", "D", "F"}
+    ]
+    return "\n".join(weak)
+
+
+def _format_at_risk(student: Student) -> str:
+    rows = [
+        f"- {code}: {rec.absences}/{rec.limit} غياب (نسبة {round(rec.rate * 100)}%)"
+        for code, rec in student.attendance.items()
+        if rec.rate >= 0.5
+    ]
+    return "\n".join(rows)
 
 
 def _coerce_constraints(raw: Any | None) -> HardConstraints | None:

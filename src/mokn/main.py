@@ -11,6 +11,7 @@ from mokn import __version__
 from mokn.api.routes import legis as legis_routes
 from mokn.api.routes import negotiate as negotiate_routes
 from mokn.api.routes import planner as planner_routes
+from mokn.api.routes import students as students_routes
 from mokn.config import configure_logging, get_settings
 
 
@@ -38,6 +39,7 @@ def create_app() -> FastAPI:
     app.include_router(legis_routes.router)
     app.include_router(planner_routes.router)
     app.include_router(negotiate_routes.router)
+    app.include_router(students_routes.router)
     return app
 
 
