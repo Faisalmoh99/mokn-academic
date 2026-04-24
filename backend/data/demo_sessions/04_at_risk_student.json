@@ -1,0 +1,453 @@
+{
+  "session_id": "837da7e723014500b26f6db7d7eaef6e",
+  "student_id": "442009876",
+  "user_request": "ابني لي جدول 15 ساعة",
+  "intent": "build_schedule",
+  "turns": [
+    {
+      "turn_id": "a7167c9274774cacbf6c6285aeb7e8bb",
+      "session_id": "837da7e723014500b26f6db7d7eaef6e",
+      "round_number": 0,
+      "turn_type": "user_request",
+      "agent": null,
+      "content": {
+        "request": "ابني لي جدول 15 ساعة"
+      },
+      "summary": "الطالب: ابني لي جدول 15 ساعة",
+      "timestamp": "2026-04-24T07:57:40.383178Z"
+    },
+    {
+      "turn_id": "6bebc01494ed4b9985659a1dd75845cf",
+      "session_id": "837da7e723014500b26f6db7d7eaef6e",
+      "round_number": 0,
+      "turn_type": "orchestrator_classify",
+      "agent": "Orchestrator",
+      "content": {
+        "intent": "build_schedule",
+        "target_hours": 15,
+        "target_semester": "fall-2026",
+        "rationale": "الطلب يطلب بناء جدول دراسي بعدد ساعات محدد."
+      },
+      "summary": "Orchestrator: طلب بناء جدول — سأفتح تفاوضاً بين Planner و Legis.",
+      "timestamp": "2026-04-24T07:57:42.435413Z"
+    },
+    {
+      "turn_id": "6a03c37462544193b6f648998c10ef01",
+      "session_id": "837da7e723014500b26f6db7d7eaef6e",
+      "round_number": 1,
+      "turn_type": "planner_propose",
+      "agent": "Planner",
+      "content": {
+        "student_id": "442009876",
+        "target_semester": "fall-2026",
+        "options": [
+          {
+            "label": "balanced",
+            "courses": [
+              {
+                "course_code": "CS302",
+                "course_name": "قواعد البيانات",
+                "section_id": "101",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "10:00",
+                "end_time": "11:30",
+                "instructor": "د. ريم القحطاني"
+              },
+              {
+                "course_code": "CS320",
+                "course_name": "هندسة البرمجيات",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "11:30",
+                "end_time": "13:00",
+                "instructor": "د. منى الغامدي"
+              },
+              {
+                "course_code": "ENG301",
+                "course_name": "الكتابة الأكاديمية",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "15:00",
+                "end_time": "16:30",
+                "instructor": "Dr. Paul Reed"
+              },
+              {
+                "course_code": "ARAB101",
+                "course_name": "اللغة العربية",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "13:00",
+                "end_time": "14:30",
+                "instructor": "د. سمير الشهراني"
+              },
+              {
+                "course_code": "CS160",
+                "course_name": "أساسيات الذكاء الاصطناعي",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "08:30",
+                "end_time": "10:00",
+                "instructor": "د. هيفاء النعيمي"
+              }
+            ],
+            "total_credits": 15,
+            "estimated_difficulty": 2.6,
+            "reasoning": "جدول متوازن: يستهدف الساعات المطلوبة بتوزيع صعوبة معتدل."
+          },
+          {
+            "label": "aggressive",
+            "courses": [
+              {
+                "course_code": "CS302",
+                "course_name": "قواعد البيانات",
+                "section_id": "101",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "10:00",
+                "end_time": "11:30",
+                "instructor": "د. ريم القحطاني"
+              },
+              {
+                "course_code": "CS320",
+                "course_name": "هندسة البرمجيات",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "11:30",
+                "end_time": "13:00",
+                "instructor": "د. منى الغامدي"
+              },
+              {
+                "course_code": "ENG301",
+                "course_name": "الكتابة الأكاديمية",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "15:00",
+                "end_time": "16:30",
+                "instructor": "Dr. Paul Reed"
+              },
+              {
+                "course_code": "ARAB101",
+                "course_name": "اللغة العربية",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "13:00",
+                "end_time": "14:30",
+                "instructor": "د. سمير الشهراني"
+              },
+              {
+                "course_code": "CS160",
+                "course_name": "أساسيات الذكاء الاصطناعي",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "08:30",
+                "end_time": "10:00",
+                "instructor": "د. هيفاء النعيمي"
+              },
+              {
+                "course_code": "ISL201",
+                "course_name": "الثقافة الإسلامية 2",
+                "section_id": "102",
+                "credits": 2,
+                "days": [
+                  "tuesday"
+                ],
+                "start_time": "13:00",
+                "end_time": "15:00",
+                "instructor": "د. ماجد الزهراني"
+              },
+              {
+                "course_code": "LIBR101",
+                "course_name": "مهارات البحث والمكتبات",
+                "section_id": "101",
+                "credits": 1,
+                "days": [
+                  "tuesday"
+                ],
+                "start_time": "12:00",
+                "end_time": "13:00",
+                "instructor": "أ. لطيفة العمير"
+              }
+            ],
+            "total_credits": 18,
+            "estimated_difficulty": 2.33,
+            "reasoning": "جدول مكثف: ساعات أعلى ومواد أصعب، لتسريع التخرج."
+          }
+        ],
+        "recommended_option": "balanced",
+        "warnings": [
+          "يجب على سعود الانتباه الشديد لمعدلات الغياب، حيث لديه غياب مرتفع حالياً في CS201 (4/6) وسبق أن واجه قرب الحرمان في هياكل البيانات.",
+          "نظراً لحصوله على درجة C في MATH101 و ENG101، يُنصح بالتركيز على المواد التي تتطلب أساساً قوياً في الرياضيات واللغة الإنجليزية.",
+          "نسبة الغياب الحالية مرتفعة؛ يقترب الطالب من الحرمان."
+        ],
+        "constraints_considered": [
+          "عدد الساعات المطلوبة (15 ساعة)",
+          "تفضيل الطالب للأوقات المسائية",
+          "تفضيل الطالب لتجنب يوم الأحد",
+          "حد أقصى 6 ساعات يومياً",
+          "سجل الطالب الأكاديمي (المعدل التراكمي، المواد المتعثر فيها، الغياب المرتفع)"
+        ],
+        "no_solution": false
+      },
+      "summary": "Planner: اقترح 15 ساعة (الخيار balanced).",
+      "timestamp": "2026-04-24T07:57:51.925746Z"
+    },
+    {
+      "turn_id": "2c0f8601f88f4a42b81e29dba5ca0de0",
+      "session_id": "837da7e723014500b26f6db7d7eaef6e",
+      "round_number": 1,
+      "turn_type": "legis_approve",
+      "agent": "Legis",
+      "content": {
+        "veto": false
+      },
+      "summary": "Legis: الجدول متوافق مع اللوائح — موافقة.",
+      "timestamp": "2026-04-24T07:57:58.995268Z"
+    },
+    {
+      "turn_id": "f271540ba4ac4dc1a4a2d95c33a383d6",
+      "session_id": "837da7e723014500b26f6db7d7eaef6e",
+      "round_number": 1,
+      "turn_type": "orchestrator_synthesize",
+      "agent": "Orchestrator",
+      "content": {
+        "final_answer": "أهلاً بك يا سعود،\n\nبناءً على طلبك لجدول دراسي بـ 15 ساعة، قمنا بتحليل الخيارات المتاحة ونوصيك بالخيار المتوازن. هذا الجدول مصمم ليناسب الساعات التي طلبتها (15 ساعة) ويقدم توزيعاً معتدلاً للصعوبة، مما يساعدك على التركيز وتحقيق أفضل النتائج. المواد المقترحة هي: CS302, CS320, ENG301, ARAB101, CS160.\n\nولأننا حريصون على نجاحك وتفوقك، نود أن نلفت انتباهك لبعض النقاط الهامة التي ستساعدك على اجتياز هذا الفصل بنجاح:\n*   لاحظنا أن لديك معدل غياب مرتفع حالياً في CS201 (4/6)، وسبق أن واجهت موقفاً قريباً من الحرمان في مادة هياكل البيانات. لذا، من الضروري جداً أن تولي اهتماماً خاصاً لحضور جميع المحاضرات في هذا الفصل لتجنب أي حرمان لا قدر الله.\n*   كما أن حصولك على درجة C في مادتي MATH101 و ENG101 يشير إلى أهمية التركيز بشكل أكبر على المواد التي تتطلب أساساً قوياً في الرياضيات واللغة الإنجليزية، لضمان بناء فهم متين للمفاهيم.\n\nنتمنى لك فصلاً دراسياً موفقاً ومليئاً بالإنجازات!",
+        "outcome": "approved"
+      },
+      "summary": "Orchestrator: الجدول جاهز — تم تأليف الرد النهائي.",
+      "timestamp": "2026-04-24T07:58:04.721396Z"
+    }
+  ],
+  "outcome": "approved",
+  "final_answer": "أهلاً بك يا سعود،\n\nبناءً على طلبك لجدول دراسي بـ 15 ساعة، قمنا بتحليل الخيارات المتاحة ونوصيك بالخيار المتوازن. هذا الجدول مصمم ليناسب الساعات التي طلبتها (15 ساعة) ويقدم توزيعاً معتدلاً للصعوبة، مما يساعدك على التركيز وتحقيق أفضل النتائج. المواد المقترحة هي: CS302, CS320, ENG301, ARAB101, CS160.\n\nولأننا حريصون على نجاحك وتفوقك، نود أن نلفت انتباهك لبعض النقاط الهامة التي ستساعدك على اجتياز هذا الفصل بنجاح:\n*   لاحظنا أن لديك معدل غياب مرتفع حالياً في CS201 (4/6)، وسبق أن واجهت موقفاً قريباً من الحرمان في مادة هياكل البيانات. لذا، من الضروري جداً أن تولي اهتماماً خاصاً لحضور جميع المحاضرات في هذا الفصل لتجنب أي حرمان لا قدر الله.\n*   كما أن حصولك على درجة C في مادتي MATH101 و ENG101 يشير إلى أهمية التركيز بشكل أكبر على المواد التي تتطلب أساساً قوياً في الرياضيات واللغة الإنجليزية، لضمان بناء فهم متين للمفاهيم.\n\nنتمنى لك فصلاً دراسياً موفقاً ومليئاً بالإنجازات!",
+  "final_proposal": {
+    "student_id": "442009876",
+    "target_semester": "fall-2026",
+    "options": [
+      {
+        "label": "balanced",
+        "courses": [
+          {
+            "course_code": "CS302",
+            "course_name": "قواعد البيانات",
+            "section_id": "101",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "10:00",
+            "end_time": "11:30",
+            "instructor": "د. ريم القحطاني"
+          },
+          {
+            "course_code": "CS320",
+            "course_name": "هندسة البرمجيات",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "11:30",
+            "end_time": "13:00",
+            "instructor": "د. منى الغامدي"
+          },
+          {
+            "course_code": "ENG301",
+            "course_name": "الكتابة الأكاديمية",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "15:00",
+            "end_time": "16:30",
+            "instructor": "Dr. Paul Reed"
+          },
+          {
+            "course_code": "ARAB101",
+            "course_name": "اللغة العربية",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "13:00",
+            "end_time": "14:30",
+            "instructor": "د. سمير الشهراني"
+          },
+          {
+            "course_code": "CS160",
+            "course_name": "أساسيات الذكاء الاصطناعي",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "08:30",
+            "end_time": "10:00",
+            "instructor": "د. هيفاء النعيمي"
+          }
+        ],
+        "total_credits": 15,
+        "estimated_difficulty": 2.6,
+        "reasoning": "جدول متوازن: يستهدف الساعات المطلوبة بتوزيع صعوبة معتدل."
+      },
+      {
+        "label": "aggressive",
+        "courses": [
+          {
+            "course_code": "CS302",
+            "course_name": "قواعد البيانات",
+            "section_id": "101",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "10:00",
+            "end_time": "11:30",
+            "instructor": "د. ريم القحطاني"
+          },
+          {
+            "course_code": "CS320",
+            "course_name": "هندسة البرمجيات",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "11:30",
+            "end_time": "13:00",
+            "instructor": "د. منى الغامدي"
+          },
+          {
+            "course_code": "ENG301",
+            "course_name": "الكتابة الأكاديمية",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "15:00",
+            "end_time": "16:30",
+            "instructor": "Dr. Paul Reed"
+          },
+          {
+            "course_code": "ARAB101",
+            "course_name": "اللغة العربية",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "13:00",
+            "end_time": "14:30",
+            "instructor": "د. سمير الشهراني"
+          },
+          {
+            "course_code": "CS160",
+            "course_name": "أساسيات الذكاء الاصطناعي",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "08:30",
+            "end_time": "10:00",
+            "instructor": "د. هيفاء النعيمي"
+          },
+          {
+            "course_code": "ISL201",
+            "course_name": "الثقافة الإسلامية 2",
+            "section_id": "102",
+            "credits": 2,
+            "days": [
+              "tuesday"
+            ],
+            "start_time": "13:00",
+            "end_time": "15:00",
+            "instructor": "د. ماجد الزهراني"
+          },
+          {
+            "course_code": "LIBR101",
+            "course_name": "مهارات البحث والمكتبات",
+            "section_id": "101",
+            "credits": 1,
+            "days": [
+              "tuesday"
+            ],
+            "start_time": "12:00",
+            "end_time": "13:00",
+            "instructor": "أ. لطيفة العمير"
+          }
+        ],
+        "total_credits": 18,
+        "estimated_difficulty": 2.33,
+        "reasoning": "جدول مكثف: ساعات أعلى ومواد أصعب، لتسريع التخرج."
+      }
+    ],
+    "recommended_option": "balanced",
+    "warnings": [
+      "يجب على سعود الانتباه الشديد لمعدلات الغياب، حيث لديه غياب مرتفع حالياً في CS201 (4/6) وسبق أن واجه قرب الحرمان في هياكل البيانات.",
+      "نظراً لحصوله على درجة C في MATH101 و ENG101، يُنصح بالتركيز على المواد التي تتطلب أساساً قوياً في الرياضيات واللغة الإنجليزية.",
+      "نسبة الغياب الحالية مرتفعة؛ يقترب الطالب من الحرمان."
+    ],
+    "constraints_considered": [
+      "عدد الساعات المطلوبة (15 ساعة)",
+      "تفضيل الطالب للأوقات المسائية",
+      "تفضيل الطالب لتجنب يوم الأحد",
+      "حد أقصى 6 ساعات يومياً",
+      "سجل الطالب الأكاديمي (المعدل التراكمي، المواد المتعثر فيها، الغياب المرتفع)"
+    ],
+    "no_solution": false
+  },
+  "started_at": "2026-04-24T07:57:40.394058Z",
+  "ended_at": "2026-04-24T07:58:04.721896Z"
+}

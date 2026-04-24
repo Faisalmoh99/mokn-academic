@@ -1,0 +1,394 @@
+[
+  {
+    "code": "CS101",
+    "name": "مقدمة في البرمجة",
+    "credits": 3,
+    "prerequisites": [],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 2,
+    "sections": [
+      {"section_id": "101", "instructor": "د. أحمد العمري", "days": ["sunday", "tuesday"], "start_time": "08:00", "end_time": "09:30", "capacity": 30, "enrolled": 18},
+      {"section_id": "102", "instructor": "د. محمد السبيعي", "days": ["monday", "wednesday"], "start_time": "10:00", "end_time": "11:30", "capacity": 30, "enrolled": 25}
+    ]
+  },
+  {
+    "code": "CS201",
+    "name": "هياكل البيانات",
+    "credits": 3,
+    "prerequisites": ["CS101"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 4,
+    "sections": [
+      {"section_id": "101", "instructor": "د. سعد الحربي", "days": ["sunday", "tuesday"], "start_time": "10:00", "end_time": "11:30", "capacity": 28, "enrolled": 20},
+      {"section_id": "102", "instructor": "د. سعد الحربي", "days": ["monday", "wednesday"], "start_time": "08:00", "end_time": "09:30", "capacity": 28, "enrolled": 15}
+    ]
+  },
+  {
+    "code": "CS202",
+    "name": "البرمجة الشيئية",
+    "credits": 3,
+    "prerequisites": ["CS101"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 3,
+    "sections": [
+      {"section_id": "101", "instructor": "د. فهد الزهراني", "days": ["sunday", "tuesday", "thursday"], "start_time": "09:00", "end_time": "10:00", "capacity": 30, "enrolled": 22},
+      {"section_id": "102", "instructor": "د. فهد الزهراني", "days": ["monday", "wednesday"], "start_time": "12:30", "end_time": "14:00", "capacity": 30, "enrolled": 10}
+    ]
+  },
+  {
+    "code": "CS301",
+    "name": "تحليل الخوارزميات",
+    "credits": 3,
+    "prerequisites": ["CS201"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 5,
+    "sections": [
+      {"section_id": "101", "instructor": "د. عبدالرحمن الشمري", "days": ["sunday", "tuesday"], "start_time": "11:30", "end_time": "13:00", "capacity": 25, "enrolled": 19},
+      {"section_id": "102", "instructor": "د. عبدالرحمن الشمري", "days": ["monday", "wednesday"], "start_time": "14:00", "end_time": "15:30", "capacity": 25, "enrolled": 12}
+    ]
+  },
+  {
+    "code": "CS302",
+    "name": "قواعد البيانات",
+    "credits": 3,
+    "prerequisites": ["CS202"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 3,
+    "sections": [
+      {"section_id": "101", "instructor": "د. ريم القحطاني", "days": ["monday", "wednesday"], "start_time": "10:00", "end_time": "11:30", "capacity": 30, "enrolled": 24},
+      {"section_id": "102", "instructor": "د. ريم القحطاني", "days": ["sunday", "tuesday"], "start_time": "12:30", "end_time": "14:00", "capacity": 30, "enrolled": 8}
+    ]
+  },
+  {
+    "code": "CS303",
+    "name": "نظم التشغيل",
+    "credits": 3,
+    "prerequisites": ["CS201", "MATH201"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 4,
+    "sections": [
+      {"section_id": "101", "instructor": "د. خالد الدوسري", "days": ["sunday", "tuesday"], "start_time": "10:00", "end_time": "11:30", "capacity": 25, "enrolled": 20},
+      {"section_id": "102", "instructor": "د. خالد الدوسري", "days": ["monday", "wednesday"], "start_time": "12:30", "end_time": "14:00", "capacity": 25, "enrolled": 14}
+    ]
+  },
+  {
+    "code": "CS310",
+    "name": "الشبكات",
+    "credits": 3,
+    "prerequisites": ["CS201"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 3,
+    "sections": [
+      {"section_id": "101", "instructor": "د. ياسر المطيري", "days": ["sunday", "tuesday", "thursday"], "start_time": "08:00", "end_time": "09:00", "capacity": 35, "enrolled": 27},
+      {"section_id": "102", "instructor": "د. ياسر المطيري", "days": ["monday", "wednesday"], "start_time": "15:30", "end_time": "17:00", "capacity": 35, "enrolled": 9}
+    ]
+  },
+  {
+    "code": "CS320",
+    "name": "هندسة البرمجيات",
+    "credits": 3,
+    "prerequisites": ["CS202"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 3,
+    "sections": [
+      {"section_id": "101", "instructor": "د. منى الغامدي", "days": ["sunday", "tuesday"], "start_time": "09:00", "end_time": "10:30", "capacity": 30, "enrolled": 18},
+      {"section_id": "102", "instructor": "د. منى الغامدي", "days": ["monday", "wednesday"], "start_time": "11:30", "end_time": "13:00", "capacity": 30, "enrolled": 11}
+    ]
+  },
+  {
+    "code": "CS401",
+    "name": "الذكاء الاصطناعي",
+    "credits": 3,
+    "prerequisites": ["CS301"],
+    "offered_semesters": ["fall"],
+    "difficulty_level": 5,
+    "sections": [
+      {"section_id": "101", "instructor": "د. نورة العنزي", "days": ["sunday", "tuesday"], "start_time": "13:00", "end_time": "14:30", "capacity": 20, "enrolled": 16},
+      {"section_id": "102", "instructor": "د. نورة العنزي", "days": ["monday", "wednesday"], "start_time": "08:00", "end_time": "09:30", "capacity": 20, "enrolled": 5}
+    ]
+  },
+  {
+    "code": "CS402",
+    "name": "أمن المعلومات",
+    "credits": 3,
+    "prerequisites": ["CS301"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 4,
+    "sections": [
+      {"section_id": "101", "instructor": "د. إبراهيم الشهري", "days": ["sunday", "tuesday"], "start_time": "15:30", "end_time": "17:00", "capacity": 25, "enrolled": 14},
+      {"section_id": "102", "instructor": "د. إبراهيم الشهري", "days": ["monday", "wednesday"], "start_time": "09:30", "end_time": "11:00", "capacity": 25, "enrolled": 10}
+    ]
+  },
+  {
+    "code": "CS403",
+    "name": "تطبيقات الويب",
+    "credits": 3,
+    "prerequisites": ["CS302"],
+    "offered_semesters": ["spring"],
+    "difficulty_level": 3,
+    "sections": [
+      {"section_id": "101", "instructor": "د. عبدالعزيز القرني", "days": ["sunday", "tuesday"], "start_time": "11:30", "end_time": "13:00", "capacity": 30, "enrolled": 19}
+    ]
+  },
+  {
+    "code": "CS410",
+    "name": "تعلم الآلة",
+    "credits": 3,
+    "prerequisites": ["CS301", "STAT101"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 5,
+    "sections": [
+      {"section_id": "101", "instructor": "د. هند الرشيد", "days": ["monday", "wednesday"], "start_time": "13:00", "end_time": "14:30", "capacity": 25, "enrolled": 18}
+    ]
+  },
+  {
+    "code": "MATH101",
+    "name": "حساب التفاضل والتكامل 1",
+    "credits": 4,
+    "prerequisites": [],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 3,
+    "sections": [
+      {"section_id": "101", "instructor": "د. صالح البلوي", "days": ["sunday", "tuesday", "thursday"], "start_time": "10:00", "end_time": "11:00", "capacity": 40, "enrolled": 32},
+      {"section_id": "102", "instructor": "د. صالح البلوي", "days": ["monday", "wednesday"], "start_time": "12:30", "end_time": "14:30", "capacity": 40, "enrolled": 18}
+    ]
+  },
+  {
+    "code": "MATH102",
+    "name": "حساب التفاضل والتكامل 2",
+    "credits": 4,
+    "prerequisites": ["MATH101"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 4,
+    "sections": [
+      {"section_id": "101", "instructor": "د. عيسى الحازمي", "days": ["sunday", "tuesday", "thursday"], "start_time": "09:00", "end_time": "10:00", "capacity": 35, "enrolled": 20},
+      {"section_id": "102", "instructor": "د. عيسى الحازمي", "days": ["monday", "wednesday"], "start_time": "14:30", "end_time": "16:30", "capacity": 35, "enrolled": 12}
+    ]
+  },
+  {
+    "code": "MATH201",
+    "name": "الرياضيات المتقطعة",
+    "credits": 3,
+    "prerequisites": ["MATH101"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 3,
+    "sections": [
+      {"section_id": "101", "instructor": "د. طارق الفيفي", "days": ["sunday", "tuesday"], "start_time": "08:00", "end_time": "09:30", "capacity": 30, "enrolled": 22},
+      {"section_id": "102", "instructor": "د. طارق الفيفي", "days": ["monday", "wednesday"], "start_time": "10:00", "end_time": "11:30", "capacity": 30, "enrolled": 10}
+    ]
+  },
+  {
+    "code": "STAT101",
+    "name": "مبادئ الإحصاء",
+    "credits": 3,
+    "prerequisites": [],
+    "offered_semesters": ["fall", "spring", "summer"],
+    "difficulty_level": 2,
+    "sections": [
+      {"section_id": "101", "instructor": "د. بدر الحربي", "days": ["sunday", "tuesday"], "start_time": "12:30", "end_time": "14:00", "capacity": 35, "enrolled": 27},
+      {"section_id": "102", "instructor": "د. بدر الحربي", "days": ["monday", "wednesday"], "start_time": "09:30", "end_time": "11:00", "capacity": 35, "enrolled": 14}
+    ]
+  },
+  {
+    "code": "ENG101",
+    "name": "اللغة الإنجليزية 1",
+    "credits": 3,
+    "prerequisites": [],
+    "offered_semesters": ["fall", "spring", "summer"],
+    "difficulty_level": 2,
+    "sections": [
+      {"section_id": "101", "instructor": "Dr. Sarah Wilson", "days": ["sunday", "tuesday", "thursday"], "start_time": "11:00", "end_time": "12:00", "capacity": 25, "enrolled": 20},
+      {"section_id": "102", "instructor": "Dr. James Hall", "days": ["monday", "wednesday"], "start_time": "16:30", "end_time": "18:00", "capacity": 25, "enrolled": 8}
+    ]
+  },
+  {
+    "code": "ENG201",
+    "name": "اللغة الإنجليزية 2",
+    "credits": 3,
+    "prerequisites": ["ENG101"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 2,
+    "sections": [
+      {"section_id": "101", "instructor": "Dr. Sarah Wilson", "days": ["sunday", "tuesday"], "start_time": "14:00", "end_time": "15:30", "capacity": 25, "enrolled": 15}
+    ]
+  },
+  {
+    "code": "UNIV101",
+    "name": "مهارات جامعية",
+    "credits": 2,
+    "prerequisites": [],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 1,
+    "sections": [
+      {"section_id": "101", "instructor": "أ. سلطان العتيبي", "days": ["thursday"], "start_time": "10:00", "end_time": "12:00", "capacity": 50, "enrolled": 30}
+    ]
+  },
+  {
+    "code": "UNIV102",
+    "name": "الثقافة الإسلامية",
+    "credits": 2,
+    "prerequisites": [],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 1,
+    "sections": [
+      {"section_id": "101", "instructor": "د. عبدالله الشمري", "days": ["monday"], "start_time": "14:00", "end_time": "16:00", "capacity": 50, "enrolled": 28},
+      {"section_id": "102", "instructor": "د. عبدالله الشمري", "days": ["wednesday"], "start_time": "10:00", "end_time": "12:00", "capacity": 50, "enrolled": 22}
+    ]
+  },
+  {
+    "code": "ISL201",
+    "name": "الثقافة الإسلامية 2",
+    "credits": 2,
+    "prerequisites": ["UNIV102"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 1,
+    "sections": [
+      {"section_id": "101", "instructor": "د. ماجد الزهراني", "days": ["sunday"], "start_time": "08:00", "end_time": "10:00", "capacity": 50, "enrolled": 26},
+      {"section_id": "102", "instructor": "د. ماجد الزهراني", "days": ["tuesday"], "start_time": "13:00", "end_time": "15:00", "capacity": 50, "enrolled": 18}
+    ]
+  },
+  {
+    "code": "ISL301",
+    "name": "الثقافة الإسلامية 3",
+    "credits": 2,
+    "prerequisites": ["ISL201"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 1,
+    "sections": [
+      {"section_id": "101", "instructor": "د. عبدالكريم الحربي", "days": ["monday"], "start_time": "09:00", "end_time": "11:00", "capacity": 50, "enrolled": 24},
+      {"section_id": "102", "instructor": "د. عبدالكريم الحربي", "days": ["wednesday"], "start_time": "14:00", "end_time": "16:00", "capacity": 50, "enrolled": 12}
+    ]
+  },
+  {
+    "code": "ARAB101",
+    "name": "اللغة العربية",
+    "credits": 3,
+    "prerequisites": [],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 2,
+    "sections": [
+      {"section_id": "101", "instructor": "د. سمير الشهراني", "days": ["sunday", "tuesday"], "start_time": "08:00", "end_time": "09:30", "capacity": 40, "enrolled": 28},
+      {"section_id": "102", "instructor": "د. سمير الشهراني", "days": ["monday", "wednesday"], "start_time": "13:00", "end_time": "14:30", "capacity": 40, "enrolled": 20}
+    ]
+  },
+  {
+    "code": "ARAB201",
+    "name": "التحرير العربي",
+    "credits": 3,
+    "prerequisites": ["ARAB101"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 2,
+    "sections": [
+      {"section_id": "101", "instructor": "د. مروان العسيري", "days": ["monday", "wednesday"], "start_time": "08:00", "end_time": "09:30", "capacity": 35, "enrolled": 18},
+      {"section_id": "102", "instructor": "د. مروان العسيري", "days": ["sunday", "tuesday"], "start_time": "14:30", "end_time": "16:00", "capacity": 35, "enrolled": 12}
+    ]
+  },
+  {
+    "code": "ENG301",
+    "name": "الكتابة الأكاديمية",
+    "credits": 3,
+    "prerequisites": ["ENG201"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 3,
+    "sections": [
+      {"section_id": "101", "instructor": "Dr. Amal Taylor", "days": ["sunday", "tuesday"], "start_time": "11:00", "end_time": "12:30", "capacity": 25, "enrolled": 14},
+      {"section_id": "102", "instructor": "Dr. Paul Reed", "days": ["monday", "wednesday"], "start_time": "15:00", "end_time": "16:30", "capacity": 25, "enrolled": 7}
+    ]
+  },
+  {
+    "code": "COMM101",
+    "name": "مهارات الاتصال",
+    "credits": 2,
+    "prerequisites": [],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 1,
+    "sections": [
+      {"section_id": "101", "instructor": "أ. بسمة الأنصاري", "days": ["sunday"], "start_time": "10:00", "end_time": "12:00", "capacity": 40, "enrolled": 22},
+      {"section_id": "102", "instructor": "أ. بسمة الأنصاري", "days": ["wednesday"], "start_time": "13:30", "end_time": "15:30", "capacity": 40, "enrolled": 16}
+    ]
+  },
+  {
+    "code": "ENTR101",
+    "name": "ريادة الأعمال",
+    "credits": 3,
+    "prerequisites": [],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 2,
+    "sections": [
+      {"section_id": "101", "instructor": "د. ريان الزهراني", "days": ["monday", "wednesday"], "start_time": "09:30", "end_time": "11:00", "capacity": 45, "enrolled": 30},
+      {"section_id": "102", "instructor": "د. ريان الزهراني", "days": ["sunday", "tuesday"], "start_time": "15:30", "end_time": "17:00", "capacity": 45, "enrolled": 14}
+    ]
+  },
+  {
+    "code": "CS150",
+    "name": "مقدمة في تقنية المعلومات",
+    "credits": 3,
+    "prerequisites": [],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 1,
+    "sections": [
+      {"section_id": "101", "instructor": "د. وليد العتيبي", "days": ["sunday", "tuesday"], "start_time": "09:30", "end_time": "11:00", "capacity": 35, "enrolled": 20},
+      {"section_id": "102", "instructor": "د. وليد العتيبي", "days": ["monday", "wednesday"], "start_time": "14:00", "end_time": "15:30", "capacity": 35, "enrolled": 11}
+    ]
+  },
+  {
+    "code": "CS160",
+    "name": "أساسيات الذكاء الاصطناعي",
+    "credits": 3,
+    "prerequisites": ["CS101"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 2,
+    "sections": [
+      {"section_id": "101", "instructor": "د. هيفاء النعيمي", "days": ["sunday", "tuesday"], "start_time": "13:00", "end_time": "14:30", "capacity": 30, "enrolled": 19},
+      {"section_id": "102", "instructor": "د. هيفاء النعيمي", "days": ["monday", "wednesday"], "start_time": "08:30", "end_time": "10:00", "capacity": 30, "enrolled": 13}
+    ]
+  },
+  {
+    "code": "MATH110",
+    "name": "مقدمة في الجبر الخطي",
+    "credits": 3,
+    "prerequisites": [],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 2,
+    "sections": [
+      {"section_id": "101", "instructor": "د. عدنان السبيعي", "days": ["sunday", "tuesday"], "start_time": "10:00", "end_time": "11:30", "capacity": 35, "enrolled": 21},
+      {"section_id": "102", "instructor": "د. عدنان السبيعي", "days": ["monday", "wednesday"], "start_time": "13:00", "end_time": "14:30", "capacity": 35, "enrolled": 13}
+    ]
+  },
+  {
+    "code": "PHYS101",
+    "name": "فيزياء عامة",
+    "credits": 3,
+    "prerequisites": [],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 3,
+    "sections": [
+      {"section_id": "101", "instructor": "د. تركي الخثعمي", "days": ["sunday", "tuesday"], "start_time": "08:30", "end_time": "10:00", "capacity": 35, "enrolled": 24},
+      {"section_id": "102", "instructor": "د. تركي الخثعمي", "days": ["monday", "wednesday"], "start_time": "15:00", "end_time": "16:30", "capacity": 35, "enrolled": 9}
+    ]
+  },
+  {
+    "code": "PHYS102",
+    "name": "فيزياء عامة 2",
+    "credits": 3,
+    "prerequisites": ["PHYS101"],
+    "offered_semesters": ["fall", "spring"],
+    "difficulty_level": 3,
+    "sections": [
+      {"section_id": "101", "instructor": "د. تركي الخثعمي", "days": ["sunday", "tuesday"], "start_time": "11:00", "end_time": "12:30", "capacity": 30, "enrolled": 15},
+      {"section_id": "102", "instructor": "د. تركي الخثعمي", "days": ["monday", "wednesday"], "start_time": "10:30", "end_time": "12:00", "capacity": 30, "enrolled": 8}
+    ]
+  },
+  {
+    "code": "LIBR101",
+    "name": "مهارات البحث والمكتبات",
+    "credits": 1,
+    "prerequisites": [],
+    "offered_semesters": ["fall", "spring", "summer"],
+    "difficulty_level": 1,
+    "sections": [
+      {"section_id": "101", "instructor": "أ. لطيفة العمير", "days": ["tuesday"], "start_time": "12:00", "end_time": "13:00", "capacity": 30, "enrolled": 17},
+      {"section_id": "102", "instructor": "أ. لطيفة العمير", "days": ["wednesday"], "start_time": "16:30", "end_time": "17:30", "capacity": 30, "enrolled": 8}
+    ]
+  }
+]

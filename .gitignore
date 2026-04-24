@@ -1,0 +1,44 @@
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
+**/.venv/
+**/venv/
+**/env/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+
+# Node
+**/node_modules/
+**/.next/
+**/build/
+**/dist/
+**/out/
+
+# Environment
+**/.env
+**/.env.local
+**/.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Logs
+**/logs/
+**/*.log
+
+# ChromaDB persisted data
+**/data/chroma/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+**/coverage/
+**/.coverage
+**/htmlcov/

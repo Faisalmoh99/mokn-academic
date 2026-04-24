@@ -1,0 +1,13 @@
+services:
+  api:
+    build: .
+    image: mokn-academic:latest
+    env_file: .env
+    environment:
+      - CHROMA_PERSIST_DIR=/app/data/chroma
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    ports:
+      - "8000:8000"
+    command: uvicorn src.mokn.main:app --host 0.0.0.0 --port 8000 --reload

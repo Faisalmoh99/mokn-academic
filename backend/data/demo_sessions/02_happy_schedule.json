@@ -1,0 +1,371 @@
+{
+  "session_id": "c515b3d122e54f4baa5df2525a9e5fac",
+  "student_id": "442001234",
+  "user_request": "ابني لي جدول 12 ساعة",
+  "intent": "build_schedule",
+  "turns": [
+    {
+      "turn_id": "a8c5def58af14325a6655cfeeb4755f9",
+      "session_id": "c515b3d122e54f4baa5df2525a9e5fac",
+      "round_number": 0,
+      "turn_type": "user_request",
+      "agent": null,
+      "content": {
+        "request": "ابني لي جدول 12 ساعة"
+      },
+      "summary": "الطالب: ابني لي جدول 12 ساعة",
+      "timestamp": "2026-04-24T07:56:26.587968Z"
+    },
+    {
+      "turn_id": "7c27b26f763a4f0a9e768f5478de6bd5",
+      "session_id": "c515b3d122e54f4baa5df2525a9e5fac",
+      "round_number": 0,
+      "turn_type": "orchestrator_classify",
+      "agent": "Orchestrator",
+      "content": {
+        "intent": "build_schedule",
+        "target_hours": 12,
+        "target_semester": "fall-2026",
+        "rationale": "الطلب يطلب بناء جدول دراسي بعدد ساعات محدد."
+      },
+      "summary": "Orchestrator: طلب بناء جدول — سأفتح تفاوضاً بين Planner و Legis.",
+      "timestamp": "2026-04-24T07:56:28.761976Z"
+    },
+    {
+      "turn_id": "9e804275fff44d09a817372b3f0529a7",
+      "session_id": "c515b3d122e54f4baa5df2525a9e5fac",
+      "round_number": 1,
+      "turn_type": "planner_propose",
+      "agent": "Planner",
+      "content": {
+        "student_id": "442001234",
+        "target_semester": "fall-2026",
+        "options": [
+          {
+            "label": "balanced",
+            "courses": [
+              {
+                "course_code": "CS302",
+                "course_name": "قواعد البيانات",
+                "section_id": "101",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "10:00",
+                "end_time": "11:30",
+                "instructor": "د. ريم القحطاني"
+              },
+              {
+                "course_code": "CS310",
+                "course_name": "الشبكات",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "15:30",
+                "end_time": "17:00",
+                "instructor": "د. ياسر المطيري"
+              },
+              {
+                "course_code": "CS320",
+                "course_name": "هندسة البرمجيات",
+                "section_id": "101",
+                "credits": 3,
+                "days": [
+                  "sunday",
+                  "tuesday"
+                ],
+                "start_time": "09:00",
+                "end_time": "10:30",
+                "instructor": "د. منى الغامدي"
+              },
+              {
+                "course_code": "ENG301",
+                "course_name": "الكتابة الأكاديمية",
+                "section_id": "101",
+                "credits": 3,
+                "days": [
+                  "sunday",
+                  "tuesday"
+                ],
+                "start_time": "11:00",
+                "end_time": "12:30",
+                "instructor": "Dr. Amal Taylor"
+              }
+            ],
+            "total_credits": 12,
+            "estimated_difficulty": 3.0,
+            "reasoning": "جدول متوازن: يستهدف الساعات المطلوبة بتوزيع صعوبة معتدل."
+          },
+          {
+            "label": "aggressive",
+            "courses": [
+              {
+                "course_code": "CS301",
+                "course_name": "تحليل الخوارزميات",
+                "section_id": "101",
+                "credits": 3,
+                "days": [
+                  "sunday",
+                  "tuesday"
+                ],
+                "start_time": "11:30",
+                "end_time": "13:00",
+                "instructor": "د. عبدالرحمن الشمري"
+              },
+              {
+                "course_code": "CS303",
+                "course_name": "نظم التشغيل",
+                "section_id": "101",
+                "credits": 3,
+                "days": [
+                  "sunday",
+                  "tuesday"
+                ],
+                "start_time": "10:00",
+                "end_time": "11:30",
+                "instructor": "د. خالد الدوسري"
+              },
+              {
+                "course_code": "CS302",
+                "course_name": "قواعد البيانات",
+                "section_id": "101",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "10:00",
+                "end_time": "11:30",
+                "instructor": "د. ريم القحطاني"
+              },
+              {
+                "course_code": "CS310",
+                "course_name": "الشبكات",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "15:30",
+                "end_time": "17:00",
+                "instructor": "د. ياسر المطيري"
+              },
+              {
+                "course_code": "CS320",
+                "course_name": "هندسة البرمجيات",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "11:30",
+                "end_time": "13:00",
+                "instructor": "د. منى الغامدي"
+              }
+            ],
+            "total_credits": 15,
+            "estimated_difficulty": 3.6,
+            "reasoning": "جدول مكثف: ساعات أعلى ومواد أصعب، لتسريع التخرج."
+          }
+        ],
+        "recommended_option": "balanced",
+        "warnings": [],
+        "constraints_considered": [
+          "عدد الساعات المطلوبة من الطالب (12 ساعة).",
+          "تفضيل الطالب للمواد التطبيقية.",
+          "تفضيل الطالب للأداء الأفضل في الفصل الصباحي.",
+          "سجل الطالب الأكاديمي الخالي من التعثر أو الغياب المرتفع.",
+          "مسار التخرج في تخصص علوم الحاسب."
+        ],
+        "no_solution": false
+      },
+      "summary": "Planner: اقترح 12 ساعة (الخيار balanced).",
+      "timestamp": "2026-04-24T07:56:39.015569Z"
+    },
+    {
+      "turn_id": "9be134d96c5b46c0a134aaa30fc419ab",
+      "session_id": "c515b3d122e54f4baa5df2525a9e5fac",
+      "round_number": 1,
+      "turn_type": "legis_approve",
+      "agent": "Legis",
+      "content": {
+        "veto": false
+      },
+      "summary": "Legis: الجدول متوافق مع اللوائح — موافقة.",
+      "timestamp": "2026-04-24T07:56:45.626564Z"
+    },
+    {
+      "turn_id": "7be9660bc3f14a159a8a2052d5c42b26",
+      "session_id": "c515b3d122e54f4baa5df2525a9e5fac",
+      "round_number": 1,
+      "turn_type": "orchestrator_synthesize",
+      "agent": "Orchestrator",
+      "content": {
+        "final_answer": "أهلاً بك عزيزي الطالب،\n\nبناءً على طلبك لجدول دراسي بـ 12 ساعة، وبعد مراجعة الخيارات المتاحة، يسعدنا أن نقدم لك التوصية التالية:\n\n**الخيار المتوازن (balanced):**\nهذا الخيار يتوافق تمامًا مع عدد الساعات التي طلبتها (12 ساعة)، ويشمل المواد التالية: CS302, CS310, CS320, و ENG301. لقد تم تصميم هذا الجدول ليكون متوازنًا من حيث توزيع صعوبة المواد، مما يضمن لك تجربة دراسية مستقرة ومثمرة دون ضغط زائد.\n\nنتمنى لك فصلاً دراسيًا موفقًا ومليئًا بالإنجازات!",
+        "outcome": "approved"
+      },
+      "summary": "Orchestrator: الجدول جاهز — تم تأليف الرد النهائي.",
+      "timestamp": "2026-04-24T07:56:49.516082Z"
+    }
+  ],
+  "outcome": "approved",
+  "final_answer": "أهلاً بك عزيزي الطالب،\n\nبناءً على طلبك لجدول دراسي بـ 12 ساعة، وبعد مراجعة الخيارات المتاحة، يسعدنا أن نقدم لك التوصية التالية:\n\n**الخيار المتوازن (balanced):**\nهذا الخيار يتوافق تمامًا مع عدد الساعات التي طلبتها (12 ساعة)، ويشمل المواد التالية: CS302, CS310, CS320, و ENG301. لقد تم تصميم هذا الجدول ليكون متوازنًا من حيث توزيع صعوبة المواد، مما يضمن لك تجربة دراسية مستقرة ومثمرة دون ضغط زائد.\n\nنتمنى لك فصلاً دراسيًا موفقًا ومليئًا بالإنجازات!",
+  "final_proposal": {
+    "student_id": "442001234",
+    "target_semester": "fall-2026",
+    "options": [
+      {
+        "label": "balanced",
+        "courses": [
+          {
+            "course_code": "CS302",
+            "course_name": "قواعد البيانات",
+            "section_id": "101",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "10:00",
+            "end_time": "11:30",
+            "instructor": "د. ريم القحطاني"
+          },
+          {
+            "course_code": "CS310",
+            "course_name": "الشبكات",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "15:30",
+            "end_time": "17:00",
+            "instructor": "د. ياسر المطيري"
+          },
+          {
+            "course_code": "CS320",
+            "course_name": "هندسة البرمجيات",
+            "section_id": "101",
+            "credits": 3,
+            "days": [
+              "sunday",
+              "tuesday"
+            ],
+            "start_time": "09:00",
+            "end_time": "10:30",
+            "instructor": "د. منى الغامدي"
+          },
+          {
+            "course_code": "ENG301",
+            "course_name": "الكتابة الأكاديمية",
+            "section_id": "101",
+            "credits": 3,
+            "days": [
+              "sunday",
+              "tuesday"
+            ],
+            "start_time": "11:00",
+            "end_time": "12:30",
+            "instructor": "Dr. Amal Taylor"
+          }
+        ],
+        "total_credits": 12,
+        "estimated_difficulty": 3.0,
+        "reasoning": "جدول متوازن: يستهدف الساعات المطلوبة بتوزيع صعوبة معتدل."
+      },
+      {
+        "label": "aggressive",
+        "courses": [
+          {
+            "course_code": "CS301",
+            "course_name": "تحليل الخوارزميات",
+            "section_id": "101",
+            "credits": 3,
+            "days": [
+              "sunday",
+              "tuesday"
+            ],
+            "start_time": "11:30",
+            "end_time": "13:00",
+            "instructor": "د. عبدالرحمن الشمري"
+          },
+          {
+            "course_code": "CS303",
+            "course_name": "نظم التشغيل",
+            "section_id": "101",
+            "credits": 3,
+            "days": [
+              "sunday",
+              "tuesday"
+            ],
+            "start_time": "10:00",
+            "end_time": "11:30",
+            "instructor": "د. خالد الدوسري"
+          },
+          {
+            "course_code": "CS302",
+            "course_name": "قواعد البيانات",
+            "section_id": "101",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "10:00",
+            "end_time": "11:30",
+            "instructor": "د. ريم القحطاني"
+          },
+          {
+            "course_code": "CS310",
+            "course_name": "الشبكات",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "15:30",
+            "end_time": "17:00",
+            "instructor": "د. ياسر المطيري"
+          },
+          {
+            "course_code": "CS320",
+            "course_name": "هندسة البرمجيات",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "11:30",
+            "end_time": "13:00",
+            "instructor": "د. منى الغامدي"
+          }
+        ],
+        "total_credits": 15,
+        "estimated_difficulty": 3.6,
+        "reasoning": "جدول مكثف: ساعات أعلى ومواد أصعب، لتسريع التخرج."
+      }
+    ],
+    "recommended_option": "balanced",
+    "warnings": [],
+    "constraints_considered": [
+      "عدد الساعات المطلوبة من الطالب (12 ساعة).",
+      "تفضيل الطالب للمواد التطبيقية.",
+      "تفضيل الطالب للأداء الأفضل في الفصل الصباحي.",
+      "سجل الطالب الأكاديمي الخالي من التعثر أو الغياب المرتفع.",
+      "مسار التخرج في تخصص علوم الحاسب."
+    ],
+    "no_solution": false
+  },
+  "started_at": "2026-04-24T07:56:26.601029Z",
+  "ended_at": "2026-04-24T07:56:49.517475Z"
+}

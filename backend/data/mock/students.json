@@ -1,0 +1,166 @@
+[
+  {
+    "student_id": "442001234",
+    "name": "فيصل محمد العتيبي",
+    "major": "علوم الحاسب",
+    "gpa": 3.2,
+    "completed_credits": 60,
+    "total_credits_required": 132,
+    "courses_completed": [
+      {"code": "CS101", "name": "مقدمة في البرمجة", "grade": "A", "semester": "441-1", "credits": 3},
+      {"code": "CS201", "name": "هياكل البيانات", "grade": "B+", "semester": "441-2", "credits": 3},
+      {"code": "CS202", "name": "البرمجة الشيئية", "grade": "A", "semester": "442-1", "credits": 3},
+      {"code": "MATH101", "name": "حساب التفاضل والتكامل 1", "grade": "B", "semester": "441-1", "credits": 4},
+      {"code": "MATH102", "name": "حساب التفاضل والتكامل 2", "grade": "B+", "semester": "441-2", "credits": 4},
+      {"code": "MATH201", "name": "الرياضيات المتقطعة", "grade": "A", "semester": "442-1", "credits": 3},
+      {"code": "STAT101", "name": "مبادئ الإحصاء", "grade": "B+", "semester": "442-1", "credits": 3},
+      {"code": "ENG101", "name": "اللغة الإنجليزية 1", "grade": "A", "semester": "441-1", "credits": 3},
+      {"code": "ENG201", "name": "اللغة الإنجليزية 2", "grade": "A", "semester": "441-2", "credits": 3},
+      {"code": "UNIV101", "name": "مهارات جامعية", "grade": "A+", "semester": "441-1", "credits": 2},
+      {"code": "UNIV102", "name": "الثقافة الإسلامية", "grade": "A", "semester": "441-2", "credits": 2}
+    ],
+    "current_courses": [],
+    "attendance": {},
+    "preferences": {
+      "preferred_times": ["morning"],
+      "avoid_days": ["thursday"],
+      "max_hours_per_day": null
+    },
+    "memory_notes": [
+      "يفضل المواد التطبيقية على النظرية",
+      "أداؤه أفضل في الفصل الصباحي"
+    ]
+  },
+  {
+    "student_id": "442005678",
+    "name": "عبدالله سالم القحطاني",
+    "major": "علوم الحاسب",
+    "gpa": 2.1,
+    "completed_credits": 30,
+    "total_credits_required": 132,
+    "courses_completed": [
+      {"code": "CS101", "name": "مقدمة في البرمجة", "grade": "D", "semester": "442-1", "credits": 3},
+      {"code": "MATH101", "name": "حساب التفاضل والتكامل 1", "grade": "C", "semester": "442-1", "credits": 4},
+      {"code": "ENG101", "name": "اللغة الإنجليزية 1", "grade": "B", "semester": "442-1", "credits": 3},
+      {"code": "UNIV101", "name": "مهارات جامعية", "grade": "B", "semester": "442-1", "credits": 2},
+      {"code": "STAT101", "name": "مبادئ الإحصاء", "grade": "C+", "semester": "442-2", "credits": 3},
+      {"code": "UNIV102", "name": "الثقافة الإسلامية", "grade": "B+", "semester": "442-2", "credits": 2},
+      {"code": "MATH102", "name": "حساب التفاضل والتكامل 2", "grade": "D+", "semester": "442-2", "credits": 4},
+      {"code": "ENG201", "name": "اللغة الإنجليزية 2", "grade": "C", "semester": "442-2", "credits": 3}
+    ],
+    "current_courses": [],
+    "attendance": {},
+    "preferences": {
+      "preferred_times": ["morning", "afternoon"],
+      "avoid_days": [],
+      "max_hours_per_day": null
+    },
+    "memory_notes": [
+      "تعثر في مقدمة البرمجة — بحاجة لدعم إضافي",
+      "يُنصح بعبء دراسي خفيف"
+    ]
+  },
+  {
+    "student_id": "442009876",
+    "name": "سعود ناصر الدوسري",
+    "major": "علوم الحاسب",
+    "gpa": 2.8,
+    "completed_credits": 45,
+    "total_credits_required": 132,
+    "courses_completed": [
+      {"code": "CS101", "name": "مقدمة في البرمجة", "grade": "B", "semester": "441-2", "credits": 3},
+      {"code": "CS202", "name": "البرمجة الشيئية", "grade": "C+", "semester": "442-1", "credits": 3},
+      {"code": "MATH101", "name": "حساب التفاضل والتكامل 1", "grade": "C", "semester": "441-2", "credits": 4},
+      {"code": "MATH102", "name": "حساب التفاضل والتكامل 2", "grade": "C+", "semester": "442-1", "credits": 4},
+      {"code": "MATH201", "name": "الرياضيات المتقطعة", "grade": "B", "semester": "442-2", "credits": 3},
+      {"code": "STAT101", "name": "مبادئ الإحصاء", "grade": "B+", "semester": "442-2", "credits": 3},
+      {"code": "ENG101", "name": "اللغة الإنجليزية 1", "grade": "C", "semester": "441-2", "credits": 3},
+      {"code": "ENG201", "name": "اللغة الإنجليزية 2", "grade": "C+", "semester": "442-1", "credits": 3},
+      {"code": "UNIV101", "name": "مهارات جامعية", "grade": "B", "semester": "441-2", "credits": 2},
+      {"code": "UNIV102", "name": "الثقافة الإسلامية", "grade": "A", "semester": "442-1", "credits": 2}
+    ],
+    "current_courses": ["CS201"],
+    "attendance": {
+      "CS201": {"absences": 4, "limit": 6}
+    },
+    "preferences": {
+      "preferred_times": ["afternoon"],
+      "avoid_days": ["sunday"],
+      "max_hours_per_day": 6
+    },
+    "memory_notes": [
+      "غياب مرتفع في هياكل البيانات — قرب الحرمان",
+      "يتحسن أداؤه في الفصول المسائية"
+    ]
+  },
+  {
+    "student_id": "442003456",
+    "name": "نورة أحمد الغامدي",
+    "major": "علوم الحاسب",
+    "gpa": 3.9,
+    "completed_credits": 90,
+    "total_credits_required": 132,
+    "courses_completed": [
+      {"code": "CS101", "name": "مقدمة في البرمجة", "grade": "A+", "semester": "441-1", "credits": 3},
+      {"code": "CS201", "name": "هياكل البيانات", "grade": "A+", "semester": "441-2", "credits": 3},
+      {"code": "CS202", "name": "البرمجة الشيئية", "grade": "A", "semester": "441-2", "credits": 3},
+      {"code": "CS301", "name": "تحليل الخوارزميات", "grade": "A", "semester": "442-1", "credits": 3},
+      {"code": "CS302", "name": "قواعد البيانات", "grade": "A+", "semester": "442-1", "credits": 3},
+      {"code": "CS303", "name": "نظم التشغيل", "grade": "A", "semester": "442-2", "credits": 3},
+      {"code": "CS310", "name": "الشبكات", "grade": "A", "semester": "442-2", "credits": 3},
+      {"code": "MATH101", "name": "حساب التفاضل والتكامل 1", "grade": "A+", "semester": "441-1", "credits": 4},
+      {"code": "MATH102", "name": "حساب التفاضل والتكامل 2", "grade": "A", "semester": "441-2", "credits": 4},
+      {"code": "MATH201", "name": "الرياضيات المتقطعة", "grade": "A+", "semester": "442-1", "credits": 3},
+      {"code": "STAT101", "name": "مبادئ الإحصاء", "grade": "A+", "semester": "441-1", "credits": 3},
+      {"code": "ENG101", "name": "اللغة الإنجليزية 1", "grade": "A", "semester": "441-1", "credits": 3},
+      {"code": "ENG201", "name": "اللغة الإنجليزية 2", "grade": "A+", "semester": "441-2", "credits": 3},
+      {"code": "UNIV101", "name": "مهارات جامعية", "grade": "A+", "semester": "441-1", "credits": 2},
+      {"code": "UNIV102", "name": "الثقافة الإسلامية", "grade": "A+", "semester": "441-2", "credits": 2}
+    ],
+    "current_courses": [],
+    "attendance": {},
+    "preferences": {
+      "preferred_times": ["morning"],
+      "avoid_days": [],
+      "max_hours_per_day": null
+    },
+    "memory_notes": [
+      "متفوقة — مرشحة لمرتبة الشرف",
+      "تهتم بمسار الذكاء الاصطناعي"
+    ]
+  },
+  {
+    "student_id": "442007890",
+    "name": "خالد إبراهيم الشهري",
+    "major": "علوم الحاسب",
+    "gpa": 2.5,
+    "completed_credits": 72,
+    "total_credits_required": 132,
+    "courses_completed": [
+      {"code": "CS101", "name": "مقدمة في البرمجة", "grade": "B", "semester": "441-1", "credits": 3},
+      {"code": "CS201", "name": "هياكل البيانات", "grade": "C", "semester": "441-2", "credits": 3},
+      {"code": "CS202", "name": "البرمجة الشيئية", "grade": "B", "semester": "441-2", "credits": 3},
+      {"code": "CS301", "name": "تحليل الخوارزميات", "grade": "D+", "semester": "442-1", "credits": 3},
+      {"code": "CS302", "name": "قواعد البيانات", "grade": "C+", "semester": "442-1", "credits": 3},
+      {"code": "MATH101", "name": "حساب التفاضل والتكامل 1", "grade": "C", "semester": "441-1", "credits": 4},
+      {"code": "MATH102", "name": "حساب التفاضل والتكامل 2", "grade": "C", "semester": "441-2", "credits": 4},
+      {"code": "MATH201", "name": "الرياضيات المتقطعة", "grade": "B", "semester": "442-1", "credits": 3},
+      {"code": "STAT101", "name": "مبادئ الإحصاء", "grade": "B+", "semester": "442-2", "credits": 3},
+      {"code": "ENG101", "name": "اللغة الإنجليزية 1", "grade": "C+", "semester": "441-1", "credits": 3},
+      {"code": "ENG201", "name": "اللغة الإنجليزية 2", "grade": "B", "semester": "441-2", "credits": 3},
+      {"code": "UNIV101", "name": "مهارات جامعية", "grade": "B", "semester": "441-1", "credits": 2},
+      {"code": "UNIV102", "name": "الثقافة الإسلامية", "grade": "A", "semester": "442-1", "credits": 2}
+    ],
+    "current_courses": [],
+    "attendance": {},
+    "preferences": {
+      "preferred_times": ["morning", "afternoon"],
+      "avoid_days": ["thursday"],
+      "max_hours_per_day": 9
+    },
+    "memory_notes": [
+      "أداء متذبذب في مواد الخوارزميات",
+      "يُفضّل تخفيف الجدول النظري"
+    ]
+  }
+]
