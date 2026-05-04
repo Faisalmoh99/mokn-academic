@@ -3,6 +3,7 @@ import { useCallback, useRef, useState } from "react";
 import { AgentsPanel } from "@/components/AgentsPanel";
 import { ChatPanel } from "@/components/ChatPanel";
 import { FailoverDialog } from "@/components/FailoverDialog";
+import { GuardianPanel } from "@/components/GuardianPanel";
 import { InputBar } from "@/components/InputBar";
 import { OfflineDemoPicker } from "@/components/OfflineDemoPicker";
 import { OfflineModeBanner } from "@/components/OfflineModeBanner";
@@ -214,6 +215,7 @@ export default function Home() {
             </div>
           )}
           <OfflineDemoPicker onSelect={runOfflineDemo} disabled={streaming} />
+          <GuardianPanel disabled={streaming} />
         </div>
         <SessionSidebar
           onReplay={replaySession}

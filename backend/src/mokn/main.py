@@ -8,6 +8,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from mokn import __version__
+from mokn.api.routes import guardian as guardian_routes
 from mokn.api.routes import legis as legis_routes
 from mokn.api.routes import negotiate as negotiate_routes
 from mokn.api.routes import planner as planner_routes
@@ -40,6 +41,7 @@ def create_app() -> FastAPI:
     app.include_router(planner_routes.router)
     app.include_router(negotiate_routes.router)
     app.include_router(students_routes.router)
+    app.include_router(guardian_routes.router)
     return app
 
 

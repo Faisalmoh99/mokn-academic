@@ -1,0 +1,67 @@
+{
+  "session_id": "7042e3d044614c09b6fa9fd8e58bae68",
+  "student_id": null,
+  "user_request": "كم الحد الأقصى للساعات لطالب معدله 3.5؟",
+  "intent": "regulation_question",
+  "turns": [
+    {
+      "turn_id": "3e1d1c57e39f4d15a3346b285337db96",
+      "session_id": "7042e3d044614c09b6fa9fd8e58bae68",
+      "round_number": 0,
+      "turn_type": "user_request",
+      "agent": null,
+      "content": {
+        "request": "كم الحد الأقصى للساعات لطالب معدله 3.5؟"
+      },
+      "summary": "الطالب: كم الحد الأقصى للساعات لطالب معدله 3.5؟",
+      "timestamp": "2026-05-04T11:06:19.455040Z"
+    },
+    {
+      "turn_id": "23ed9be92c7541f7b23e7376da420380",
+      "session_id": "7042e3d044614c09b6fa9fd8e58bae68",
+      "round_number": 0,
+      "turn_type": "orchestrator_classify",
+      "agent": "Orchestrator",
+      "content": {
+        "intent": "regulation_question",
+        "target_hours": null,
+        "target_semester": null,
+        "rationale": "الطلب يستفسر عن لائحة أكاديمية تخص الحد الأقصى للساعات المسموح بها."
+      },
+      "summary": "Orchestrator: سؤال عن اللوائح — سأحوّله إلى Legis.",
+      "timestamp": "2026-05-04T11:06:21.238266Z"
+    },
+    {
+      "turn_id": "06984083843b41ac917f55b57baf20a4",
+      "session_id": "7042e3d044614c09b6fa9fd8e58bae68",
+      "round_number": 0,
+      "turn_type": "legis_review",
+      "agent": "Legis",
+      "content": {
+        "answer": "لا أجد هذا في اللوائح المتاحة.",
+        "citations": [],
+        "confidence": "low"
+      },
+      "summary": "Legis: لا أجد هذا في اللوائح المتاحة.",
+      "timestamp": "2026-05-04T11:06:21.661003Z"
+    },
+    {
+      "turn_id": "c30ef994fc6c40b3ac61ed8f9b961a1b",
+      "session_id": "7042e3d044614c09b6fa9fd8e58bae68",
+      "round_number": 0,
+      "turn_type": "orchestrator_synthesize",
+      "agent": "Orchestrator",
+      "content": {
+        "final_answer": "أهلاً بك عزيزي الطالب،\n\nبناءً على اللوائح المتاحة لدينا، لا توجد معلومات محددة بشأن الحد الأقصى للساعات لطالب معدله 3.5.",
+        "outcome": "regulation_only"
+      },
+      "summary": "Orchestrator: صاغ إجابة اللوائح للطالب.",
+      "timestamp": "2026-05-04T11:06:23.861832Z"
+    }
+  ],
+  "outcome": "regulation_only",
+  "final_answer": "أهلاً بك عزيزي الطالب،\n\nبناءً على اللوائح المتاحة لدينا، لا توجد معلومات محددة بشأن الحد الأقصى للساعات لطالب معدله 3.5.",
+  "final_proposal": null,
+  "started_at": "2026-05-04T11:06:19.467777Z",
+  "ended_at": "2026-05-04T11:06:23.863050Z"
+}

@@ -17,7 +17,7 @@ const AGENTS: {
   { name: "Orchestrator", role: "المنسق — يفهم الطلب ويصوغ الرد", icon: "🎯" },
   { name: "Legis", role: "حارس اللوائح — يراجع كل جدول", icon: "⚖️" },
   { name: "Planner", role: "مهندس الجداول — يرشح الخيارات", icon: "📅" },
-  { name: "Guardian", role: "المراقب الاستباقي", icon: "🛡️", disabled: true },
+  { name: "Guardian", role: "المراقب الاستباقي — يفحص ويُنبّه", icon: "🛡️" },
 ];
 
 export function AgentsPanel({ currentTurn, lastAgent, streaming }: AgentsPanelProps) {

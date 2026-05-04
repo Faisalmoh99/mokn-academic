@@ -10,6 +10,7 @@ from typing import Annotated
 
 from fastapi import Depends
 
+from mokn.agents.guardian import GuardianAgent, get_guardian_agent
 from mokn.agents.legis import LegisAgent, get_legis_agent
 from mokn.agents.orchestrator import OrchestratorAgent, get_orchestrator_agent
 from mokn.agents.planner import PlannerAgent, get_planner_agent
@@ -39,6 +40,10 @@ def orchestrator_agent_dep() -> OrchestratorAgent:
     return get_orchestrator_agent()
 
 
+def guardian_agent_dep() -> GuardianAgent:
+    return get_guardian_agent()
+
+
 def student_repo_dep() -> StudentRepository:
     return get_student_repository()
 
@@ -55,6 +60,7 @@ SettingsDep = Annotated[Settings, Depends(settings_dep)]
 LegisDep = Annotated[LegisAgent, Depends(legis_agent_dep)]
 PlannerDep = Annotated[PlannerAgent, Depends(planner_agent_dep)]
 OrchestratorDep = Annotated[OrchestratorAgent, Depends(orchestrator_agent_dep)]
+GuardianDep = Annotated[GuardianAgent, Depends(guardian_agent_dep)]
 StudentRepoDep = Annotated[StudentRepository, Depends(student_repo_dep)]
 CourseRepoDep = Annotated[CourseRepository, Depends(course_repo_dep)]
 NegotiationStoreDep = Annotated[NegotiationStore, Depends(negotiation_store_dep)]

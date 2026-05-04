@@ -1,0 +1,282 @@
+{
+  "scan_id": "offline-demo-001",
+  "started_at": "2026-05-04T09:00:00+00:00",
+  "completed_at": "2026-05-04T09:00:12+00:00",
+  "total_students_scanned": 5,
+  "students_at_risk": 3,
+  "alerts": [
+    {
+      "alert_id": "c8188ecf3b944d51a8579c222d24c05c",
+      "student_id": "442009876",
+      "student_name": "سعود ناصر الدوسري",
+      "triggered_at": "2026-05-04T09:00:00Z",
+      "assessment": {
+        "student_id": "442009876",
+        "student_name": "سعود ناصر الدوسري",
+        "overall_severity": "high",
+        "factors": [
+          {
+            "factor_type": "attendance_high",
+            "course_code": "CS201",
+            "description_ar": "غياب مرتفع في CS201: 4 من أصل 6 (67% من الحد المسموح).",
+            "severity": "medium",
+            "evidence": {
+              "absences": 4,
+              "limit": 6,
+              "ratio": 0.667
+            }
+          },
+          {
+            "factor_type": "weak_grade",
+            "course_code": "CS202",
+            "description_ar": "تقدير C+ في CS202 (البرمجة الشيئية) — فصل 442-1.",
+            "severity": "low",
+            "evidence": {
+              "grade": "C+",
+              "semester": "442-1",
+              "credits": 3
+            }
+          },
+          {
+            "factor_type": "weak_grade",
+            "course_code": "MATH102",
+            "description_ar": "تقدير C+ في MATH102 (حساب التفاضل والتكامل 2) — فصل 442-1.",
+            "severity": "low",
+            "evidence": {
+              "grade": "C+",
+              "semester": "442-1",
+              "credits": 4
+            }
+          },
+          {
+            "factor_type": "weak_grade",
+            "course_code": "ENG201",
+            "description_ar": "تقدير C+ في ENG201 (اللغة الإنجليزية 2) — فصل 442-1.",
+            "severity": "low",
+            "evidence": {
+              "grade": "C+",
+              "semester": "442-1",
+              "credits": 3
+            }
+          },
+          {
+            "factor_type": "weak_grade",
+            "course_code": "MATH101",
+            "description_ar": "تقدير C في MATH101 (حساب التفاضل والتكامل 1) — فصل 441-2.",
+            "severity": "low",
+            "evidence": {
+              "grade": "C",
+              "semester": "441-2",
+              "credits": 4
+            }
+          },
+          {
+            "factor_type": "weak_grade",
+            "course_code": "ENG101",
+            "description_ar": "تقدير C في ENG101 (اللغة الإنجليزية 1) — فصل 441-2.",
+            "severity": "low",
+            "evidence": {
+              "grade": "C",
+              "semester": "441-2",
+              "credits": 3
+            }
+          },
+          {
+            "factor_type": "prior_dn",
+            "course_code": null,
+            "description_ar": "ملاحظة سابقة عن قرب الحرمان أو حرمان فعلي: غياب مرتفع في هياكل البيانات — قرب الحرمان",
+            "severity": "high",
+            "evidence": {
+              "matching_notes": [
+                "غياب مرتفع في هياكل البيانات — قرب الحرمان"
+              ]
+            }
+          }
+        ],
+        "summary_ar": "سعود ناصر الدوسري: مستوى المخاطرة مرتفع بناءً على 7 مؤشر."
+      },
+      "recommendations": [
+        {
+          "title_ar": "تحسين الحضور",
+          "rationale_ar": "نسبة الغياب تقترب من الحد — تجنّب أي غياب إضافي.",
+          "suggested_action": "improve_attendance",
+          "priority": "advisory"
+        },
+        {
+          "title_ar": "استشارة المرشد بشأن المواد المتعثّر فيها",
+          "rationale_ar": "تكرار التقديرات المنخفضة يستدعي خطة دعم.",
+          "suggested_action": "consult_advisor",
+          "priority": "advisory"
+        }
+      ],
+      "message_ar": "مرحباً سعود، نسبة غيابك في إحدى المواد تقترب من الحد المسموح به. بإمكانك تعديل المسار قبل أن يتفاقم الوضع. إن أحببت تفاصيل أكثر أو خيارات أوضح، تواصل مع مرشدك الأكاديمي البشري."
+    },
+    {
+      "alert_id": "0a71a17519244e17b4fc4653726e8616",
+      "student_id": "442005678",
+      "student_name": "عبدالله سالم القحطاني",
+      "triggered_at": "2026-05-04T09:00:00Z",
+      "assessment": {
+        "student_id": "442005678",
+        "student_name": "عبدالله سالم القحطاني",
+        "overall_severity": "medium",
+        "factors": [
+          {
+            "factor_type": "weak_grade",
+            "course_code": "STAT101",
+            "description_ar": "تقدير C+ في STAT101 (مبادئ الإحصاء) — فصل 442-2.",
+            "severity": "low",
+            "evidence": {
+              "grade": "C+",
+              "semester": "442-2",
+              "credits": 3
+            }
+          },
+          {
+            "factor_type": "weak_grade",
+            "course_code": "MATH102",
+            "description_ar": "تقدير D+ في MATH102 (حساب التفاضل والتكامل 2) — فصل 442-2.",
+            "severity": "medium",
+            "evidence": {
+              "grade": "D+",
+              "semester": "442-2",
+              "credits": 4
+            }
+          },
+          {
+            "factor_type": "weak_grade",
+            "course_code": "ENG201",
+            "description_ar": "تقدير C في ENG201 (اللغة الإنجليزية 2) — فصل 442-2.",
+            "severity": "low",
+            "evidence": {
+              "grade": "C",
+              "semester": "442-2",
+              "credits": 3
+            }
+          },
+          {
+            "factor_type": "weak_grade",
+            "course_code": "CS101",
+            "description_ar": "تقدير D في CS101 (مقدمة في البرمجة) — فصل 442-1.",
+            "severity": "medium",
+            "evidence": {
+              "grade": "D",
+              "semester": "442-1",
+              "credits": 3
+            }
+          },
+          {
+            "factor_type": "weak_grade",
+            "course_code": "MATH101",
+            "description_ar": "تقدير C في MATH101 (حساب التفاضل والتكامل 1) — فصل 442-1.",
+            "severity": "low",
+            "evidence": {
+              "grade": "C",
+              "semester": "442-1",
+              "credits": 4
+            }
+          }
+        ],
+        "summary_ar": "عبدالله سالم القحطاني: مستوى المخاطرة متوسط بناءً على 5 مؤشر."
+      },
+      "recommendations": [
+        {
+          "title_ar": "استشارة المرشد بشأن المواد المتعثّر فيها",
+          "rationale_ar": "تكرار التقديرات المنخفضة يستدعي خطة دعم.",
+          "suggested_action": "consult_advisor",
+          "priority": "advisory"
+        }
+      ],
+      "message_ar": "مرحباً عبدالله، هناك تقديرات منخفضة في عدد من المواد قد تؤثر على معدلك التراكمي. إن أحببت تفاصيل أكثر أو خيارات أوضح، تواصل مع مرشدك الأكاديمي البشري."
+    },
+    {
+      "alert_id": "fd4c00efff4f4669b248dedfd17b34f6",
+      "student_id": "442007890",
+      "student_name": "خالد إبراهيم الشهري",
+      "triggered_at": "2026-05-04T09:00:00Z",
+      "assessment": {
+        "student_id": "442007890",
+        "student_name": "خالد إبراهيم الشهري",
+        "overall_severity": "medium",
+        "factors": [
+          {
+            "factor_type": "weak_grade",
+            "course_code": "CS301",
+            "description_ar": "تقدير D+ في CS301 (تحليل الخوارزميات) — فصل 442-1.",
+            "severity": "medium",
+            "evidence": {
+              "grade": "D+",
+              "semester": "442-1",
+              "credits": 3
+            }
+          },
+          {
+            "factor_type": "weak_grade",
+            "course_code": "CS302",
+            "description_ar": "تقدير C+ في CS302 (قواعد البيانات) — فصل 442-1.",
+            "severity": "low",
+            "evidence": {
+              "grade": "C+",
+              "semester": "442-1",
+              "credits": 3
+            }
+          },
+          {
+            "factor_type": "weak_grade",
+            "course_code": "CS201",
+            "description_ar": "تقدير C في CS201 (هياكل البيانات) — فصل 441-2.",
+            "severity": "low",
+            "evidence": {
+              "grade": "C",
+              "semester": "441-2",
+              "credits": 3
+            }
+          },
+          {
+            "factor_type": "weak_grade",
+            "course_code": "MATH102",
+            "description_ar": "تقدير C في MATH102 (حساب التفاضل والتكامل 2) — فصل 441-2.",
+            "severity": "low",
+            "evidence": {
+              "grade": "C",
+              "semester": "441-2",
+              "credits": 4
+            }
+          },
+          {
+            "factor_type": "weak_grade",
+            "course_code": "MATH101",
+            "description_ar": "تقدير C في MATH101 (حساب التفاضل والتكامل 1) — فصل 441-1.",
+            "severity": "low",
+            "evidence": {
+              "grade": "C",
+              "semester": "441-1",
+              "credits": 4
+            }
+          },
+          {
+            "factor_type": "weak_grade",
+            "course_code": "ENG101",
+            "description_ar": "تقدير C+ في ENG101 (اللغة الإنجليزية 1) — فصل 441-1.",
+            "severity": "low",
+            "evidence": {
+              "grade": "C+",
+              "semester": "441-1",
+              "credits": 3
+            }
+          }
+        ],
+        "summary_ar": "خالد إبراهيم الشهري: مستوى المخاطرة متوسط بناءً على 6 مؤشر."
+      },
+      "recommendations": [
+        {
+          "title_ar": "استشارة المرشد بشأن المواد المتعثّر فيها",
+          "rationale_ar": "تكرار التقديرات المنخفضة يستدعي خطة دعم.",
+          "suggested_action": "consult_advisor",
+          "priority": "advisory"
+        }
+      ],
+      "message_ar": "مرحباً خالد، هناك تقديرات منخفضة في عدد من المواد قد تؤثر على معدلك التراكمي. إن أحببت تفاصيل أكثر أو خيارات أوضح، تواصل مع مرشدك الأكاديمي البشري."
+    }
+  ]
+}

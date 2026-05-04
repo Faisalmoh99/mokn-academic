@@ -1,0 +1,735 @@
+{
+  "session_id": "bdd20b06cf50427aafca5255058b5f99",
+  "student_id": "442005678",
+  "user_request": "ابني لي جدول 21 ساعة",
+  "intent": "build_schedule",
+  "turns": [
+    {
+      "turn_id": "5165495f6bc84706b7b4326f1ee87799",
+      "session_id": "bdd20b06cf50427aafca5255058b5f99",
+      "round_number": 0,
+      "turn_type": "user_request",
+      "agent": null,
+      "content": {
+        "request": "ابني لي جدول 21 ساعة"
+      },
+      "summary": "الطالب: ابني لي جدول 21 ساعة",
+      "timestamp": "2026-05-04T11:19:11.570707Z"
+    },
+    {
+      "turn_id": "65284f1a01d84a9a82b2f91d3d9c250e",
+      "session_id": "bdd20b06cf50427aafca5255058b5f99",
+      "round_number": 0,
+      "turn_type": "orchestrator_classify",
+      "agent": "Orchestrator",
+      "content": {
+        "intent": "build_schedule",
+        "target_hours": 21,
+        "target_semester": "fall-2026",
+        "rationale": "الطلب يطلب بناء جدول دراسي بعدد ساعات محدد."
+      },
+      "summary": "Orchestrator: طلب بناء جدول — سأفتح تفاوضاً بين Planner و Legis.",
+      "timestamp": "2026-05-04T11:19:13.805844Z"
+    },
+    {
+      "turn_id": "78168a5a0ff04092913c17c8907e194b",
+      "session_id": "bdd20b06cf50427aafca5255058b5f99",
+      "round_number": 1,
+      "turn_type": "planner_propose",
+      "agent": "Planner",
+      "content": {
+        "student_id": "442005678",
+        "target_semester": "fall-2026",
+        "options": [
+          {
+            "label": "safe",
+            "courses": [
+              {
+                "course_code": "LIBR101",
+                "course_name": "مهارات البحث والمكتبات",
+                "section_id": "101",
+                "credits": 1,
+                "days": [
+                  "tuesday"
+                ],
+                "start_time": "12:00",
+                "end_time": "13:00",
+                "instructor": "أ. لطيفة العمير"
+              },
+              {
+                "course_code": "COMM101",
+                "course_name": "مهارات الاتصال",
+                "section_id": "101",
+                "credits": 2,
+                "days": [
+                  "sunday"
+                ],
+                "start_time": "10:00",
+                "end_time": "12:00",
+                "instructor": "أ. بسمة الأنصاري"
+              },
+              {
+                "course_code": "ISL201",
+                "course_name": "الثقافة الإسلامية 2",
+                "section_id": "101",
+                "credits": 2,
+                "days": [
+                  "sunday"
+                ],
+                "start_time": "08:00",
+                "end_time": "10:00",
+                "instructor": "د. ماجد الزهراني"
+              },
+              {
+                "course_code": "CS150",
+                "course_name": "مقدمة في تقنية المعلومات",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "14:00",
+                "end_time": "15:30",
+                "instructor": "د. وليد العتيبي"
+              },
+              {
+                "course_code": "CS160",
+                "course_name": "أساسيات الذكاء الاصطناعي",
+                "section_id": "101",
+                "credits": 3,
+                "days": [
+                  "sunday",
+                  "tuesday"
+                ],
+                "start_time": "13:00",
+                "end_time": "14:30",
+                "instructor": "د. هيفاء النعيمي"
+              },
+              {
+                "course_code": "ENTR101",
+                "course_name": "ريادة الأعمال",
+                "section_id": "101",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "09:30",
+                "end_time": "11:00",
+                "instructor": "د. ريان الزهراني"
+              },
+              {
+                "course_code": "CS202",
+                "course_name": "البرمجة الشيئية",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "12:30",
+                "end_time": "14:00",
+                "instructor": "د. فهد الزهراني"
+              }
+            ],
+            "total_credits": 17,
+            "estimated_difficulty": 1.71,
+            "reasoning": "جدول متحفظ: أقل ساعات وأسهل مواد، مناسب للاحتياط."
+          },
+          {
+            "label": "balanced",
+            "courses": [
+              {
+                "course_code": "CS202",
+                "course_name": "البرمجة الشيئية",
+                "section_id": "101",
+                "credits": 3,
+                "days": [
+                  "sunday",
+                  "tuesday",
+                  "thursday"
+                ],
+                "start_time": "09:00",
+                "end_time": "10:00",
+                "instructor": "د. فهد الزهراني"
+              },
+              {
+                "course_code": "ENG301",
+                "course_name": "الكتابة الأكاديمية",
+                "section_id": "101",
+                "credits": 3,
+                "days": [
+                  "sunday",
+                  "tuesday"
+                ],
+                "start_time": "11:00",
+                "end_time": "12:30",
+                "instructor": "Dr. Amal Taylor"
+              },
+              {
+                "course_code": "MATH201",
+                "course_name": "الرياضيات المتقطعة",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "10:00",
+                "end_time": "11:30",
+                "instructor": "د. طارق الفيفي"
+              },
+              {
+                "course_code": "PHYS101",
+                "course_name": "فيزياء عامة",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "15:00",
+                "end_time": "16:30",
+                "instructor": "د. تركي الخثعمي"
+              },
+              {
+                "course_code": "ARAB101",
+                "course_name": "اللغة العربية",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "13:00",
+                "end_time": "14:30",
+                "instructor": "د. سمير الشهراني"
+              },
+              {
+                "course_code": "CS160",
+                "course_name": "أساسيات الذكاء الاصطناعي",
+                "section_id": "101",
+                "credits": 3,
+                "days": [
+                  "sunday",
+                  "tuesday"
+                ],
+                "start_time": "13:00",
+                "end_time": "14:30",
+                "instructor": "د. هيفاء النعيمي"
+              },
+              {
+                "course_code": "CS201",
+                "course_name": "هياكل البيانات",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "08:00",
+                "end_time": "09:30",
+                "instructor": "د. سعد الحربي"
+              }
+            ],
+            "total_credits": 21,
+            "estimated_difficulty": 2.86,
+            "reasoning": "جدول متوازن: يستهدف الساعات المطلوبة بتوزيع صعوبة معتدل."
+          },
+          {
+            "label": "aggressive",
+            "courses": [
+              {
+                "course_code": "CS201",
+                "course_name": "هياكل البيانات",
+                "section_id": "101",
+                "credits": 3,
+                "days": [
+                  "sunday",
+                  "tuesday"
+                ],
+                "start_time": "10:00",
+                "end_time": "11:30",
+                "instructor": "د. سعد الحربي"
+              },
+              {
+                "course_code": "CS202",
+                "course_name": "البرمجة الشيئية",
+                "section_id": "101",
+                "credits": 3,
+                "days": [
+                  "sunday",
+                  "tuesday",
+                  "thursday"
+                ],
+                "start_time": "09:00",
+                "end_time": "10:00",
+                "instructor": "د. فهد الزهراني"
+              },
+              {
+                "course_code": "ENG301",
+                "course_name": "الكتابة الأكاديمية",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "15:00",
+                "end_time": "16:30",
+                "instructor": "Dr. Paul Reed"
+              },
+              {
+                "course_code": "MATH201",
+                "course_name": "الرياضيات المتقطعة",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "10:00",
+                "end_time": "11:30",
+                "instructor": "د. طارق الفيفي"
+              },
+              {
+                "course_code": "ARAB101",
+                "course_name": "اللغة العربية",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "monday",
+                  "wednesday"
+                ],
+                "start_time": "13:00",
+                "end_time": "14:30",
+                "instructor": "د. سمير الشهراني"
+              },
+              {
+                "course_code": "CS160",
+                "course_name": "أساسيات الذكاء الاصطناعي",
+                "section_id": "101",
+                "credits": 3,
+                "days": [
+                  "sunday",
+                  "tuesday"
+                ],
+                "start_time": "13:00",
+                "end_time": "14:30",
+                "instructor": "د. هيفاء النعيمي"
+              },
+              {
+                "course_code": "ENTR101",
+                "course_name": "ريادة الأعمال",
+                "section_id": "102",
+                "credits": 3,
+                "days": [
+                  "sunday",
+                  "tuesday"
+                ],
+                "start_time": "15:30",
+                "end_time": "17:00",
+                "instructor": "د. ريان الزهراني"
+              },
+              {
+                "course_code": "LIBR101",
+                "course_name": "مهارات البحث والمكتبات",
+                "section_id": "101",
+                "credits": 1,
+                "days": [
+                  "tuesday"
+                ],
+                "start_time": "12:00",
+                "end_time": "13:00",
+                "instructor": "أ. لطيفة العمير"
+              }
+            ],
+            "total_credits": 22,
+            "estimated_difficulty": 2.64,
+            "reasoning": "جدول مكثف: ساعات أعلى ومواد أصعب، لتسريع التخرج."
+          }
+        ],
+        "recommended_option": "safe",
+        "warnings": [
+          "لم يتم تلبية طلب عبدالله سالم القحطاني لـ 21 ساعة دراسية، حيث تم اقتراح 17 ساعة لضمان عبء دراسي خفيف يتناسب مع سجله الأكاديمي.",
+          "يجب على عبدالله الانتباه بشكل خاص لمواد علوم الحاسب والرياضيات نظراً لتعثره السابق في CS101 و MATH101 و MATH102.",
+          "معدل عبدالله التراكمي 2.10 يتطلب منه التركيز الشديد لتحسين أدائه الأكاديمي وتجنب الوقوع تحت الإنذار الأكاديمي.",
+          "المعدل التراكمي منخفض — يُفضّل الخيار المتحفظ.",
+          "أحد الخيارات يتجاوز 18 ساعة — يحتاج موافقة خاصة."
+        ],
+        "constraints_considered": [
+          "طلب الطالب لـ 21 ساعة دراسية.",
+          "المعدل التراكمي للطالب (2.10).",
+          "تعثر الطالب في مواد سابقة (CS101, MATH101, MATH102, ENG201).",
+          "التوصية الأكاديمية بعبء دراسي خفيف.",
+          "الحاجة لدعم إضافي في البرمجة.",
+          "تفضيلات الطالب لأوقات المحاضرات (صباحاً، بعد الظهر)."
+        ],
+        "no_solution": false
+      },
+      "summary": "Planner: اقترح 17 ساعة (الخيار safe).",
+      "timestamp": "2026-05-04T11:19:28.277444Z"
+    },
+    {
+      "turn_id": "353a0604c78a4b3b99f4a62fa5dc7e18",
+      "session_id": "bdd20b06cf50427aafca5255058b5f99",
+      "round_number": 1,
+      "turn_type": "legis_approve",
+      "agent": "Legis",
+      "content": {
+        "veto": false
+      },
+      "summary": "Legis: الجدول متوافق مع اللوائح — موافقة.",
+      "timestamp": "2026-05-04T11:19:28.307989Z"
+    },
+    {
+      "turn_id": "86f1a4c940b040dcb8c784db3f8421ab",
+      "session_id": "bdd20b06cf50427aafca5255058b5f99",
+      "round_number": 1,
+      "turn_type": "orchestrator_synthesize",
+      "agent": "Orchestrator",
+      "content": {
+        "final_answer": "مرحباً بك يا عبدالله،\n\nلقد راجعنا طلبك لبناء جدول دراسي بـ 21 ساعة. بناءً على سجلك الأكاديمي الحالي، والذي يتضمن معدلاً تراكمياً 2.10 وبعض التحديات السابقة في مواد مثل CS101 و MATH101 و MATH102، فإننا نوصي لك بالخيار \"المتحفظ\" الذي يهدف إلى مساعدتك على بناء أساس قوي وتحسين أدائك.\n\nيتضمن هذا الجدول 17 ساعة دراسية موزعة على المواد التالية: LIBR101, COMM101, ISL201, CS150, CS160, ENTR101, CS202. لقد تم اختيار هذا الخيار ليكون عبئاً دراسياً خفيفاً ومناسباً لك في هذه المرحلة، مما يمنحك فرصة ممتازة للتركيز وتحسين أدائك.\n\nنود أن نلفت انتباهك بلطف إلى أهمية التركيز الشديد على مواد علوم الحاسب والرياضيات، نظراً لتعثرك السابق فيها. هذا الجدول المتحفظ سيساعدك على تجنب أي إنذار أكاديمي مستقبلي ورفع معدلك التراكمي.\n\nنتمنى لك كل التوفيق في دراستك. نحن هنا لدعمك في رحلتك الأكاديمية.",
+        "outcome": "approved"
+      },
+      "summary": "Orchestrator: الجدول جاهز — تم تأليف الرد النهائي.",
+      "timestamp": "2026-05-04T11:19:35.576838Z"
+    }
+  ],
+  "outcome": "approved",
+  "final_answer": "مرحباً بك يا عبدالله،\n\nلقد راجعنا طلبك لبناء جدول دراسي بـ 21 ساعة. بناءً على سجلك الأكاديمي الحالي، والذي يتضمن معدلاً تراكمياً 2.10 وبعض التحديات السابقة في مواد مثل CS101 و MATH101 و MATH102، فإننا نوصي لك بالخيار \"المتحفظ\" الذي يهدف إلى مساعدتك على بناء أساس قوي وتحسين أدائك.\n\nيتضمن هذا الجدول 17 ساعة دراسية موزعة على المواد التالية: LIBR101, COMM101, ISL201, CS150, CS160, ENTR101, CS202. لقد تم اختيار هذا الخيار ليكون عبئاً دراسياً خفيفاً ومناسباً لك في هذه المرحلة، مما يمنحك فرصة ممتازة للتركيز وتحسين أدائك.\n\nنود أن نلفت انتباهك بلطف إلى أهمية التركيز الشديد على مواد علوم الحاسب والرياضيات، نظراً لتعثرك السابق فيها. هذا الجدول المتحفظ سيساعدك على تجنب أي إنذار أكاديمي مستقبلي ورفع معدلك التراكمي.\n\nنتمنى لك كل التوفيق في دراستك. نحن هنا لدعمك في رحلتك الأكاديمية.",
+  "final_proposal": {
+    "student_id": "442005678",
+    "target_semester": "fall-2026",
+    "options": [
+      {
+        "label": "safe",
+        "courses": [
+          {
+            "course_code": "LIBR101",
+            "course_name": "مهارات البحث والمكتبات",
+            "section_id": "101",
+            "credits": 1,
+            "days": [
+              "tuesday"
+            ],
+            "start_time": "12:00",
+            "end_time": "13:00",
+            "instructor": "أ. لطيفة العمير"
+          },
+          {
+            "course_code": "COMM101",
+            "course_name": "مهارات الاتصال",
+            "section_id": "101",
+            "credits": 2,
+            "days": [
+              "sunday"
+            ],
+            "start_time": "10:00",
+            "end_time": "12:00",
+            "instructor": "أ. بسمة الأنصاري"
+          },
+          {
+            "course_code": "ISL201",
+            "course_name": "الثقافة الإسلامية 2",
+            "section_id": "101",
+            "credits": 2,
+            "days": [
+              "sunday"
+            ],
+            "start_time": "08:00",
+            "end_time": "10:00",
+            "instructor": "د. ماجد الزهراني"
+          },
+          {
+            "course_code": "CS150",
+            "course_name": "مقدمة في تقنية المعلومات",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "14:00",
+            "end_time": "15:30",
+            "instructor": "د. وليد العتيبي"
+          },
+          {
+            "course_code": "CS160",
+            "course_name": "أساسيات الذكاء الاصطناعي",
+            "section_id": "101",
+            "credits": 3,
+            "days": [
+              "sunday",
+              "tuesday"
+            ],
+            "start_time": "13:00",
+            "end_time": "14:30",
+            "instructor": "د. هيفاء النعيمي"
+          },
+          {
+            "course_code": "ENTR101",
+            "course_name": "ريادة الأعمال",
+            "section_id": "101",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "09:30",
+            "end_time": "11:00",
+            "instructor": "د. ريان الزهراني"
+          },
+          {
+            "course_code": "CS202",
+            "course_name": "البرمجة الشيئية",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "12:30",
+            "end_time": "14:00",
+            "instructor": "د. فهد الزهراني"
+          }
+        ],
+        "total_credits": 17,
+        "estimated_difficulty": 1.71,
+        "reasoning": "جدول متحفظ: أقل ساعات وأسهل مواد، مناسب للاحتياط."
+      },
+      {
+        "label": "balanced",
+        "courses": [
+          {
+            "course_code": "CS202",
+            "course_name": "البرمجة الشيئية",
+            "section_id": "101",
+            "credits": 3,
+            "days": [
+              "sunday",
+              "tuesday",
+              "thursday"
+            ],
+            "start_time": "09:00",
+            "end_time": "10:00",
+            "instructor": "د. فهد الزهراني"
+          },
+          {
+            "course_code": "ENG301",
+            "course_name": "الكتابة الأكاديمية",
+            "section_id": "101",
+            "credits": 3,
+            "days": [
+              "sunday",
+              "tuesday"
+            ],
+            "start_time": "11:00",
+            "end_time": "12:30",
+            "instructor": "Dr. Amal Taylor"
+          },
+          {
+            "course_code": "MATH201",
+            "course_name": "الرياضيات المتقطعة",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "10:00",
+            "end_time": "11:30",
+            "instructor": "د. طارق الفيفي"
+          },
+          {
+            "course_code": "PHYS101",
+            "course_name": "فيزياء عامة",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "15:00",
+            "end_time": "16:30",
+            "instructor": "د. تركي الخثعمي"
+          },
+          {
+            "course_code": "ARAB101",
+            "course_name": "اللغة العربية",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "13:00",
+            "end_time": "14:30",
+            "instructor": "د. سمير الشهراني"
+          },
+          {
+            "course_code": "CS160",
+            "course_name": "أساسيات الذكاء الاصطناعي",
+            "section_id": "101",
+            "credits": 3,
+            "days": [
+              "sunday",
+              "tuesday"
+            ],
+            "start_time": "13:00",
+            "end_time": "14:30",
+            "instructor": "د. هيفاء النعيمي"
+          },
+          {
+            "course_code": "CS201",
+            "course_name": "هياكل البيانات",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "08:00",
+            "end_time": "09:30",
+            "instructor": "د. سعد الحربي"
+          }
+        ],
+        "total_credits": 21,
+        "estimated_difficulty": 2.86,
+        "reasoning": "جدول متوازن: يستهدف الساعات المطلوبة بتوزيع صعوبة معتدل."
+      },
+      {
+        "label": "aggressive",
+        "courses": [
+          {
+            "course_code": "CS201",
+            "course_name": "هياكل البيانات",
+            "section_id": "101",
+            "credits": 3,
+            "days": [
+              "sunday",
+              "tuesday"
+            ],
+            "start_time": "10:00",
+            "end_time": "11:30",
+            "instructor": "د. سعد الحربي"
+          },
+          {
+            "course_code": "CS202",
+            "course_name": "البرمجة الشيئية",
+            "section_id": "101",
+            "credits": 3,
+            "days": [
+              "sunday",
+              "tuesday",
+              "thursday"
+            ],
+            "start_time": "09:00",
+            "end_time": "10:00",
+            "instructor": "د. فهد الزهراني"
+          },
+          {
+            "course_code": "ENG301",
+            "course_name": "الكتابة الأكاديمية",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "15:00",
+            "end_time": "16:30",
+            "instructor": "Dr. Paul Reed"
+          },
+          {
+            "course_code": "MATH201",
+            "course_name": "الرياضيات المتقطعة",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "10:00",
+            "end_time": "11:30",
+            "instructor": "د. طارق الفيفي"
+          },
+          {
+            "course_code": "ARAB101",
+            "course_name": "اللغة العربية",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "monday",
+              "wednesday"
+            ],
+            "start_time": "13:00",
+            "end_time": "14:30",
+            "instructor": "د. سمير الشهراني"
+          },
+          {
+            "course_code": "CS160",
+            "course_name": "أساسيات الذكاء الاصطناعي",
+            "section_id": "101",
+            "credits": 3,
+            "days": [
+              "sunday",
+              "tuesday"
+            ],
+            "start_time": "13:00",
+            "end_time": "14:30",
+            "instructor": "د. هيفاء النعيمي"
+          },
+          {
+            "course_code": "ENTR101",
+            "course_name": "ريادة الأعمال",
+            "section_id": "102",
+            "credits": 3,
+            "days": [
+              "sunday",
+              "tuesday"
+            ],
+            "start_time": "15:30",
+            "end_time": "17:00",
+            "instructor": "د. ريان الزهراني"
+          },
+          {
+            "course_code": "LIBR101",
+            "course_name": "مهارات البحث والمكتبات",
+            "section_id": "101",
+            "credits": 1,
+            "days": [
+              "tuesday"
+            ],
+            "start_time": "12:00",
+            "end_time": "13:00",
+            "instructor": "أ. لطيفة العمير"
+          }
+        ],
+        "total_credits": 22,
+        "estimated_difficulty": 2.64,
+        "reasoning": "جدول مكثف: ساعات أعلى ومواد أصعب، لتسريع التخرج."
+      }
+    ],
+    "recommended_option": "safe",
+    "warnings": [
+      "لم يتم تلبية طلب عبدالله سالم القحطاني لـ 21 ساعة دراسية، حيث تم اقتراح 17 ساعة لضمان عبء دراسي خفيف يتناسب مع سجله الأكاديمي.",
+      "يجب على عبدالله الانتباه بشكل خاص لمواد علوم الحاسب والرياضيات نظراً لتعثره السابق في CS101 و MATH101 و MATH102.",
+      "معدل عبدالله التراكمي 2.10 يتطلب منه التركيز الشديد لتحسين أدائه الأكاديمي وتجنب الوقوع تحت الإنذار الأكاديمي.",
+      "المعدل التراكمي منخفض — يُفضّل الخيار المتحفظ.",
+      "أحد الخيارات يتجاوز 18 ساعة — يحتاج موافقة خاصة."
+    ],
+    "constraints_considered": [
+      "طلب الطالب لـ 21 ساعة دراسية.",
+      "المعدل التراكمي للطالب (2.10).",
+      "تعثر الطالب في مواد سابقة (CS101, MATH101, MATH102, ENG201).",
+      "التوصية الأكاديمية بعبء دراسي خفيف.",
+      "الحاجة لدعم إضافي في البرمجة.",
+      "تفضيلات الطالب لأوقات المحاضرات (صباحاً، بعد الظهر)."
+    ],
+    "no_solution": false
+  },
+  "started_at": "2026-05-04T11:19:11.586584Z",
+  "ended_at": "2026-05-04T11:19:35.578673Z"
+}
