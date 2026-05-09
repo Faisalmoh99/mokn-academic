@@ -1,0 +1,74 @@
+{
+  "session_id": "1e6cde3758c94e3a9c591aa89e2ee71f",
+  "student_id": null,
+  "user_request": "كم الحد الأقصى للساعات لطالب معدله 3.5؟",
+  "intent": "regulation_question",
+  "turns": [
+    {
+      "turn_id": "a9e0b1b88aa640c090c2b6a434aa4f7e",
+      "session_id": "1e6cde3758c94e3a9c591aa89e2ee71f",
+      "round_number": 0,
+      "turn_type": "user_request",
+      "agent": null,
+      "content": {
+        "request": "كم الحد الأقصى للساعات لطالب معدله 3.5؟"
+      },
+      "summary": "الطالب: كم الحد الأقصى للساعات لطالب معدله 3.5؟",
+      "timestamp": "2026-05-07T12:49:08.014103Z"
+    },
+    {
+      "turn_id": "566cc779b0b84d41a4c0dc3e95378c67",
+      "session_id": "1e6cde3758c94e3a9c591aa89e2ee71f",
+      "round_number": 0,
+      "turn_type": "orchestrator_classify",
+      "agent": "Orchestrator",
+      "content": {
+        "intent": "regulation_question",
+        "target_hours": null,
+        "target_semester": null,
+        "rationale": "الطلب يستفسر عن لائحة أكاديمية تخص الحد الأقصى للساعات المسموحة."
+      },
+      "summary": "Orchestrator: سؤال عن اللوائح — سأحوّله إلى Legis.",
+      "timestamp": "2026-05-07T12:49:11.016930Z"
+    },
+    {
+      "turn_id": "18f72d7baeaa41fe946ec82baf4378e2",
+      "session_id": "1e6cde3758c94e3a9c591aa89e2ee71f",
+      "round_number": 0,
+      "turn_type": "legis_review",
+      "agent": "Legis",
+      "content": {
+        "answer": "الحد الأقصى للساعات المعتمدة التي يمكن لطالب معدله التراكمي 3.5 تسجيلها هو 18 ساعة معتمدة في الفصل، وذلك لأن معدله التراكمي 3.0 أو أعلى (مقطع 1).",
+        "citations": [
+          {
+            "text": "المادة 14: العبء الدراسي يحدد العبء الدراسي للطالب المنتظم بين 12 و 18 ساعة معتمدة في الفصل. لا يُسمح للطالب بتسجيل 18 ساعة إلا إذا كان معدله التراكمي 3.0 أو أعلى. الطالب الذي معدله التراكمي بين 2.0 و 2.99 يُسمح له بحد أقصى 15 ساعة. الطالب الذي معدله أقل من 2.0 يقتصر على 12 ساعة كحد أقصى.",
+            "source": "credit-hours.txt",
+            "page": 1,
+            "section": "المادة 14: العبء الدراسي"
+          }
+        ],
+        "confidence": "high"
+      },
+      "summary": "Legis: الحد الأقصى للساعات المعتمدة التي يمكن لطالب معدله التراكمي 3.5 تسجيلها هو 18 ساعة معتمدة في الفصل، وذلك لأن معدله التر…",
+      "timestamp": "2026-05-07T12:49:14.106703Z"
+    },
+    {
+      "turn_id": "42c35ecc75a24eac9da78eb960725bb4",
+      "session_id": "1e6cde3758c94e3a9c591aa89e2ee71f",
+      "round_number": 0,
+      "turn_type": "orchestrator_synthesize",
+      "agent": "Orchestrator",
+      "content": {
+        "final_answer": "أهلاً بك عزيزي الطالب،\n\nبناءً على معدلك التراكمي البالغ 3.5، يمكنك تسجيل 18 ساعة معتمدة كحد أقصى في الفصل الدراسي. وذلك لأن معدلك التراكمي يقع ضمن الفئة التي تسمح بتسجيل هذا العدد من الساعات.\n\nأتمنى لك فصلاً دراسياً موفقاً!",
+        "outcome": "regulation_only"
+      },
+      "summary": "Orchestrator: صاغ إجابة اللوائح للطالب.",
+      "timestamp": "2026-05-07T12:49:17.263373Z"
+    }
+  ],
+  "outcome": "regulation_only",
+  "final_answer": "أهلاً بك عزيزي الطالب،\n\nبناءً على معدلك التراكمي البالغ 3.5، يمكنك تسجيل 18 ساعة معتمدة كحد أقصى في الفصل الدراسي. وذلك لأن معدلك التراكمي يقع ضمن الفئة التي تسمح بتسجيل هذا العدد من الساعات.\n\nأتمنى لك فصلاً دراسياً موفقاً!",
+  "final_proposal": null,
+  "started_at": "2026-05-07T12:49:08.030290Z",
+  "ended_at": "2026-05-07T12:49:17.264324Z"
+}
