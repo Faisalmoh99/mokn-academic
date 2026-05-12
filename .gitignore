@@ -32,8 +32,12 @@ env/
 
 # Project data
 data/chroma/
+data/sessions/
 logs/
 !logs/.gitkeep
+
+# Claude Code
+.claude/
 
 # PDFs (regulations may be large; committed selectively)
 data/regulations/*.pdf
